@@ -18,7 +18,9 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
     
     func start() {
         navigationController.delegate = self
+        let welcomeViewModel = WelcomeViewModel()
         let vc = WelcomePageVC.instantiateCustom(storyboard: WelcomePageVC.storyboardName)
+        vc.viewModel = welcomeViewModel
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }

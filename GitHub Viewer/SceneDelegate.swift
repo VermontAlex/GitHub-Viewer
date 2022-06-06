@@ -15,9 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let navController = UINavigationController()
-        navController.view.backgroundColor = .red
         coordinator = AppCoordinator(navigationController: navController)
-//        coordinator?.startLoginPage()
         coordinator?.start()
         
         let appWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
