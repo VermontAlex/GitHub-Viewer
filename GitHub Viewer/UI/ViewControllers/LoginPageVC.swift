@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  LoginPageVC.swift
 //  GitHub Viewer
 //
 //  Created by Oleksandr Oliinyk on 06.06.2022.
@@ -7,11 +7,10 @@
 
 import UIKit
 
-class HomeScreenVC: UIViewController, StoryboardedProtocol {
+class LoginPageVC: UIViewController, StoryboardedProtocol {
     
-    static let identifier = "HomeScreenVC"
-    static let storyboardName = "HomeScreen"
-    
+    static let identifier = "LoginPageVC"
+    static let storyboardName = "LoginPage"
     weak var coordinator: MainCoordinator?
     
     override func viewDidLoad() {

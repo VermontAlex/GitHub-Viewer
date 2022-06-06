@@ -10,8 +10,19 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var coordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+        let navController = UINavigationController()
+        coordinator = MainCoordinator(navigationController: navController)
+        coordinator?.startLoginPage()
+        
+        let appWindow = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        appWindow.windowScene = windowScene
+        appWindow.rootViewController = navController
+        appWindow.makeKeyAndVisible()
+        
+        window = appWindow
     }
 }
