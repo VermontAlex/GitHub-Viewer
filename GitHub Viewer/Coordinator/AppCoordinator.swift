@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AppCoordinator: CoordinatorProtocol {
+class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
     
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
@@ -17,6 +17,7 @@ class AppCoordinator: CoordinatorProtocol {
     }
     
     func start() {
+        navigationController.delegate = self
         let vc = WelcomePageVC.instantiateCustom(storyboard: WelcomePageVC.storyboardName)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
@@ -26,5 +27,27 @@ class AppCoordinator: CoordinatorProtocol {
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
+    }
+    
+    func childDidFinish(_ coordinator : CoordinatorProtocol?){
+        // Call this if a coordinator is done.
+        for (index, child) in childCoordinators.enumerated() {
+            if child === coordinator {
+                childCoordinators.remove(at: index)
+                break
+            }
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
+        
+        if navigationController.viewControllers.contains(fromViewController) {
+            return
+        }
+        
+        if let loginPageViewController = fromViewController as? LoginPageVC {
+            self.childDidFinish(loginPageViewController.coordinator)
+        }
     }
 }

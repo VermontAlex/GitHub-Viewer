@@ -18,21 +18,18 @@ final class AuthCoordinator: NSObject, CoordinatorProtocol, UINavigationControll
     }
     
     func start() {
-        navigationController.delegate = self
         let vc = LoginPageVC.instantiateCustom(storyboard: LoginPageVC.storyboardName)
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: true)
     }
     
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
-        
-        if navigationController.viewControllers.contains(fromViewController) {
-            return
-        }
-        
-        if let loginPageViewController = fromViewController as? LoginPageVC {
-            self.childDidFinish(loginPageViewController.coordinator)
-        }
-    }
+    func childDidFinish(_ coordinator : CoordinatorProtocol?){
+       // Call this if a coordinator is done.
+       for (index, child) in childCoordinators.enumerated() {
+           if child === coordinator {
+               childCoordinators.remove(at: index)
+               break
+           }
+       }
+   }
 }

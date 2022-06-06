@@ -13,16 +13,5 @@ protocol CoordinatorProtocol: AnyObject {
     var navigationController : UINavigationController { get set }
     
     func start()
-}
-
-extension CoordinatorProtocol {
-    func childDidFinish(_ coordinator : CoordinatorProtocol?){
-       // Call this if a coordinator is done.
-       for (index, child) in childCoordinators.enumerated() {
-           if child === coordinator {
-               childCoordinators.remove(at: index)
-               break
-           }
-       }
-   }
+    func childDidFinish(_ coordinator : CoordinatorProtocol?)
 }
