@@ -12,7 +12,7 @@ class HomeScreenVC: UIViewController, StoryboardedProtocol {
     static let identifier = "HomeScreenVC"
     static let storyboardName = "HomeScreen"
     
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: AuthCoordinator?
     
     override func viewDidLoad() {
         super.viewDidLoad()
