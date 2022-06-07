@@ -26,6 +26,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="4DW-IA-Zw1" secondAttribute="trailing" id="Hmj-B3-4Sf"/>
+                                    <constraint firstItem="4DW-IA-Zw1" firstAttribute="top" secondItem="yTI-AM-rbm" secondAttribute="top" id="ZGY-4e-nZL"/>
+                                    <constraint firstItem="4DW-IA-Zw1" firstAttribute="leading" secondItem="yTI-AM-rbm" secondAttribute="leading" id="dyR-gd-Trd"/>
+                                    <constraint firstAttribute="bottom" secondItem="4DW-IA-Zw1" secondAttribute="bottom" id="nWc-Ot-w2l"/>
+                                </constraints>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Y6-rs-zw9">
                                 <rect key="frame" x="367" y="572" width="100" height="50"/>

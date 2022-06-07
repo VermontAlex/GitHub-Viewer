@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C4258284F38A800DB91AF /* UIFont-Extension.swift */; };
 		56716F7D284E0B8200DAFE9F /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56716F7C284E0B8200DAFE9F /* AuthCoordinator.swift */; };
 		56716F7F284E0BE900DAFE9F /* StoryboardedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56716F7E284E0BE900DAFE9F /* StoryboardedProtocol.swift */; };
 		56716F90284E0DBD00DAFE9F /* LoginPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56716F8F284E0DBD00DAFE9F /* LoginPageVC.swift */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		566C4258284F38A800DB91AF /* UIFont-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont-Extension.swift"; sourceTree = "<group>"; };
 		56716F7C284E0B8200DAFE9F /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		56716F7E284E0BE900DAFE9F /* StoryboardedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardedProtocol.swift; sourceTree = "<group>"; };
 		56716F8F284E0DBD00DAFE9F /* LoginPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageVC.swift; sourceTree = "<group>"; };
@@ -90,6 +92,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		566C4257284F388A00DB91AF /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				566C4258284F38A800DB91AF /* UIFont-Extension.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		56716F75284E02F300DAFE9F /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -173,6 +183,7 @@
 				56716F75284E02F300DAFE9F /* UI */,
 				56716F78284E030A00DAFE9F /* Managers */,
 				56716F7A284E034800DAFE9F /* ViewModels */,
+				566C4257284F388A00DB91AF /* Helpers */,
 				56A34721284DEFE600CEFF73 /* SceneDelegate.swift */,
 				56A3471F284DEFE600CEFF73 /* AppDelegate.swift */,
 				56A3472D284DEFE800CEFF73 /* Info.plist */,
@@ -325,6 +336,7 @@
 				56716F7F284E0BE900DAFE9F /* StoryboardedProtocol.swift in Sources */,
 				56716F7D284E0B8200DAFE9F /* AuthCoordinator.swift in Sources */,
 				56A34720284DEFE600CEFF73 /* AppDelegate.swift in Sources */,
+				566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */,
 				56716F9E284E324500DAFE9F /* AppCoordinator.swift in Sources */,
 				56A34722284DEFE600CEFF73 /* SceneDelegate.swift in Sources */,
 				56716FA8284E56CC00DAFE9F /* WelcomeViewModel.swift in Sources */,

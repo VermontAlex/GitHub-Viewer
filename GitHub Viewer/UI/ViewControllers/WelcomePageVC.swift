@@ -20,19 +20,21 @@ class WelcomePageVC: UIViewController, StoryboardedProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setUpViewModel()
-        setUpUI()
+        fillInformation()
+        setWelcomeTitle()
     }
     
-    private func setUpViewModel() {
+    private func fillInformation() {
         guard viewModel != nil else { return }
         loginButton.setTitle(viewModel?.buttonTitle, for: .normal)
         welcomeTitle.text = viewModel?.greetings
     }
     
-    private func setUpUI() {
+    private func setWelcomeTitle() {
         welcomeTitle.numberOfLines = 0
         welcomeTitle.textColor = .systemBlue
+        welcomeTitle.font = UIFont.sf(style: .semibold, size: 50)
+        welcomeTitle.adjustsFontSizeToFitWidth = true
     }
     
     @IBAction func loginButton(_ sender: Any) {
