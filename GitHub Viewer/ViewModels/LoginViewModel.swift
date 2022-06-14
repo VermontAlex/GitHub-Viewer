@@ -5,10 +5,6 @@
 //  Created by Oleksandr Oliinyk on 06.06.2022.
 //
 
-protocol LoginViewModelProtocol {
-    var title: String { get set }
-}
-
-struct LoginViewModel: LoginViewModelProtocol {
-    var title: String
+struct LoginViewModel {
+    var title: String = "Please signIn with GitHub Account"
 }
