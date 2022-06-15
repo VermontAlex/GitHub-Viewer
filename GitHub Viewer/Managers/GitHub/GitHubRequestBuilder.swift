@@ -11,9 +11,14 @@ enum GitHubRequestBuilder {
     
     case getAccessTokenRequest(LoginGitHubModel)
     case getAuthRequest(cliendId: String)
+    case getUserProfile(accessToken: GitHubTokenModel)
     
     private var baseUrl: String {
         return "https://github.com/"
+    }
+    
+    private var apiGHUrl: String {
+        return "https://api.github.com"
     }
     
     private var path: String {
@@ -22,21 +27,16 @@ enum GitHubRequestBuilder {
              return "/login/oauth/access_token"
         case .getAuthRequest:
             return "/login/oauth/authorize"
+        case .getUserProfile:
+            return "/user"
         }
     }
     
-    var requestAuth: URLRequest? {
+    var request: URLRequest? {
         switch self {
         case .getAuthRequest(let cliendId):
             guard let url = formSignInUrl(cliendId: cliendId) else { return nil }
             return URLRequest(url: url)
-        default:
-            return nil
-        }
-    }
-    
-    var requestToken: URLRequest? {
-        switch self {
         case .getAccessTokenRequest(let authGHModel):
             guard let url = URL(string: path, relativeTo: URL(string: baseUrl)) else { return nil }
             let httpBody = try? JSONEncoder().encode(authGHModel)
@@ -46,8 +46,12 @@ enum GitHubRequestBuilder {
             request.addValue("application/json", forHTTPHeaderField: "Accept")
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             return request
-        default:
-            return nil
+        case .getUserProfile(let token):
+            guard let url = URL(string: path, relativeTo: URL(string: apiGHUrl)) else { return nil }
+            var request = URLRequest(url: url)
+            request.addValue(token.tokenType + " " + token.accessToken, forHTTPHeaderField: "Authorization")
+            
+            return request
         }
     }
 

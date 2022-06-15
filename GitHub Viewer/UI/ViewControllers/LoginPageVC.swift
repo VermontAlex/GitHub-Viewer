@@ -17,7 +17,7 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
     
     weak var coordinator: CoordinatorProtocol?
     var viewModel: LoginViewModel?
-    let apiManager: NetworkManagerProtocol = GitHubNetworkManager()
+    var gitApiManager: GitHubNetworkManager?
     var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -36,7 +36,7 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
     
     func startAuthWebViewProcedure() {
         //  Захендлить ошибку
-        guard let authRequest = GitHubRequestBuilder.getAuthRequest(cliendId: AuthConstants.cliendIdGH).requestAuth else { return }
+        guard let authRequest = GitHubRequestBuilder.getAuthRequest(cliendId: AuthConstants.cliendIdGH).request else { return }
         let githubVC = UIViewController()
         
         webView = WKWebView()
@@ -95,25 +95,26 @@ extension LoginPageVC: WKNavigationDelegate {
         decisionHandler(.allow)
         if let responseUrl = checkAuthResult(request: navigationAction.request) {
             guard let code = parseGitHubSignInResponse(url: responseUrl) else { return }
+            
             let loginModel = LoginGitHubModel(grantType: AuthConstants.grantType,
                                               code: code,
                                               clientId: AuthConstants.cliendIdGH,
                                               clientSecret: AuthConstants.clientSecretGH)
             
-            apiManager.getAccessTokenWithBody(responseCode: code, authGHModel: loginModel) { (result) in
+            gitApiManager?.gitHubSignIn(responseCode: code, authGHModel: loginModel, completion: { result in
                 switch result {
-                case .success(let token):
-                    print("*\(token)")
+                case .success(let profile):
+                    print(profile.login)
                 case .failure(let error):
-                    print("*\(error)")
+                    print(error.localizedDescription)
                 }
-            }
+            })
             
             self.dismiss(animated: true, completion: nil)
         }
     }
 
-    func checkAuthResult(request: URLRequest) -> String? {
+    private func checkAuthResult(request: URLRequest) -> String? {
         let requestURLString = (request.url?.absoluteString)! as String
         if requestURLString.contains("code=") {
             return requestURLString

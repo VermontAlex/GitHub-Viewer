@@ -8,6 +8,9 @@
 import UIKit
 
 class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
+    func stop() {
+        //Intentionaly left empty
+    }
     
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController

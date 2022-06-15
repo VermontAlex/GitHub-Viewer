@@ -7,59 +7,118 @@
 
 import Foundation
 
-protocol NetworkManagerProtocol {
-    func getAccessTokenWithBody(responseCode: String, authGHModel: LoginGitHubModel, completion: @escaping (Result<GitHubTokenModel, Error>) -> Void)
-}
-
-struct GitHubNetworkManager: NetworkManagerProtocol {
+struct GitHubNetworkManager {
     
-    func getAccessTokenWithBody(responseCode: String, authGHModel: LoginGitHubModel,
-                                completion: @escaping (Result<GitHubTokenModel, Error>) -> Void) {
-        guard let request = GitHubRequestBuilder.getAccessTokenRequest(authGHModel).requestToken else { return }
+    private let server = "github.com"
+    
+    func gitHubSignIn(responseCode: String, authGHModel: LoginGitHubModel,
+                      completion: @escaping (Result<GHUserProfileModel, Error>) -> Void) {
+        guard let request = GitHubRequestBuilder.getAccessTokenRequest(authGHModel).request else { return }
         
-        let session = URLSession.shared
-        session.dataTask(with: request as URLRequest) { (data, response, error) in
-            if let data = data {
-                do {
-                    let result = try JSONDecoder().decode(GitHubTokenModel.self, from: data)
-                    
-                    DispatchQueue.main.async {
-                        completion(.success(result))
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        completion(.failure(error))
-                    }
-                }
-            }
-        }.resume()
-    }
-}
-
-
-/*
-func fetchGitHubUserProfile(accessToken: String) {
-        let tokenURLFull = "https://api.github.com/user"
-        let verify: NSURL = NSURL(string: tokenURLFull)!
-        let request: NSMutableURLRequest = NSMutableURLRequest(url: verify as URL)
-        request.addValue("Bearer " + accessToken, forHTTPHeaderField: "Authorization")
-        let task = URLSession.shared.dataTask(with: request as URLRequest) { data, _, error in
-            if error == nil {
-                let result = try! JSONSerialization.jsonObject(with: data!, options: .allowFragments) as? [AnyHashable: Any]
-                // AccessToken
-                print("GitHub Access Token: \(accessToken)")
-                // GitHub Handle
-                let githubId: Int! = (result?["id"] as! Int)
-                print("GitHub Id: \(githubId ?? 0)")
-                // GitHub Display Name
-                let githubDisplayName: String! = (result?["login"] as! String)
-                print("GitHub Display Name: \(githubDisplayName ?? "")")
-                
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true, completion: nil)
-                }
+        let operationQueue = OperationQueue()
+        var accessToken: GitHubTokenModel?
+        
+        let tokenOperation = FetchToken(urlRequest: request) { result in
+            switch result {
+            case .success(let token):
+                print(token.accessToken)
+                accessToken = token
+            case . failure(let error):
+                completion(.failure(error))
             }
         }
-        task.resume()
+        
+        tokenOperation.completionBlock = {
+            guard let token = accessToken,
+                    let request = GitHubRequestBuilder.getUserProfile(accessToken: token).request
+            else { return }
+            
+            let profileOperation = FetchProfile(urlRequest: request, completion: completion)
+            operationQueue.addOperation(profileOperation)
+        }
+        
+        operationQueue.addOperation(tokenOperation)
+        
+        operationQueue.waitUntilAllOperationsAreFinished()
     }
-*/
+}
+
+private final class FetchToken: BasicSequenceOperation {
+    
+    init(urlRequest: URLRequest,
+         completion: @escaping (Result<GitHubTokenModel, Error>) -> Void) {
+        super.init()
+        task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
+            if let data = data {
+                do {
+                    let token = try JSONDecoder().decode(GitHubTokenModel.self, from: data)
+                        completion(.success(token))
+                        self?.state = .finished
+                } catch {
+                        completion(.failure(error))
+                        self?.state = .finished
+                }
+            } else if let error = error {
+                    completion(.failure(error))
+                    self?.state = .finished
+            }
+            self?.state = .finished
+        })
+    }
+    
+    override func start() {
+        if isCancelled {
+            state = .finished
+            return
+        }
+        
+        state = .executing
+        
+        self.task?.resume()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        self.task?.cancel()
+    }
+}
+
+private final class FetchProfile: BasicSequenceOperation {
+    
+    init(urlRequest: URLRequest,
+         completion: @escaping (Result<GHUserProfileModel, Error>) -> Void) {
+        super.init()
+        task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
+            if let data = data {
+                do {
+                    let profile = try JSONDecoder().decode(GHUserProfileModel.self, from: data)
+                        completion(.success(profile))
+                        self?.state = .finished
+                } catch {
+                        completion(.failure(error))
+                        self?.state = .finished
+                }
+            } else if let error = error {
+                    completion(.failure(error))
+                    self?.state = .finished
+            }
+            self?.state = .finished
+        })
+    }
+    
+    override func start() {
+        if isCancelled {
+            state = .finished
+            return
+        }
+        
+        state = .executing
+        
+        self.task?.resume()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        self.task?.cancel()
+    }
+}

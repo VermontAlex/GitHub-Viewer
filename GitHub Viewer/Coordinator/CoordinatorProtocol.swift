@@ -13,5 +13,6 @@ protocol CoordinatorProtocol: AnyObject {
     var navigationController : UINavigationController { get set }
     
     func start()
+    func stop()
     func childDidFinish(_ coordinator : CoordinatorProtocol?)
 }

@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		563965A82859F91500C127BB /* BasicSequenceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965A72859F91500C127BB /* BasicSequenceOperation.swift */; };
 		566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C4258284F38A800DB91AF /* UIFont-Extension.swift */; };
 		566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */; };
 		566C425D284FA80800DB91AF /* GitHubRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */; };
+		566D26D72858A4C200416EF1 /* GHUserProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566D26D62858A4C200416EF1 /* GHUserProfileModel.swift */; };
+		566D27012858B5C400416EF1 /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566D27002858B5C400416EF1 /* KeyChainManager.swift */; };
+		566D27032858C34600416EF1 /* CredentialsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566D27022858C34500416EF1 /* CredentialsModel.swift */; };
 		56716F7D284E0B8200DAFE9F /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56716F7C284E0B8200DAFE9F /* AuthCoordinator.swift */; };
 		56716F7F284E0BE900DAFE9F /* StoryboardedProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56716F7E284E0BE900DAFE9F /* StoryboardedProtocol.swift */; };
 		56716F90284E0DBD00DAFE9F /* LoginPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56716F8F284E0DBD00DAFE9F /* LoginPageVC.swift */; };
@@ -27,7 +31,6 @@
 		56A34729284DEFE800CEFF73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A34728284DEFE800CEFF73 /* Assets.xcassets */; };
 		56A3472C284DEFE800CEFF73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A3472A284DEFE800CEFF73 /* LaunchScreen.storyboard */; };
 		56B343222850EC5D00CB5B49 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B343212850EC5D00CB5B49 /* AuthConstants.swift */; };
-		56B343242850ECA900CB5B49 /* GitHubProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B343232850ECA900CB5B49 /* GitHubProfileModel.swift */; };
 		56B343262850EF7F00CB5B49 /* LoginGitHubModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B343252850EF7F00CB5B49 /* LoginGitHubModel.swift */; };
 		56B343282850F1F000CB5B49 /* GitHubTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B343272850F1F000CB5B49 /* GitHubTokenModel.swift */; };
 /* End PBXBuildFile section */
@@ -50,9 +53,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		563965A72859F91500C127BB /* BasicSequenceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSequenceOperation.swift; sourceTree = "<group>"; };
 		566C4258284F38A800DB91AF /* UIFont-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont-Extension.swift"; sourceTree = "<group>"; };
 		566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager.swift; sourceTree = "<group>"; };
 		566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestBuilder.swift; sourceTree = "<group>"; };
+		566D26D62858A4C200416EF1 /* GHUserProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHUserProfileModel.swift; sourceTree = "<group>"; };
+		566D27002858B5C400416EF1 /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
+		566D27022858C34500416EF1 /* CredentialsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialsModel.swift; sourceTree = "<group>"; };
 		56716F7C284E0B8200DAFE9F /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		56716F7E284E0BE900DAFE9F /* StoryboardedProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoryboardedProtocol.swift; sourceTree = "<group>"; };
 		56716F8F284E0DBD00DAFE9F /* LoginPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPageVC.swift; sourceTree = "<group>"; };
@@ -74,7 +81,6 @@
 		56A34732284DEFE800CEFF73 /* GitHub ViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHub ViewerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A3473C284DEFE800CEFF73 /* GitHub ViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHub ViewerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56B343212850EC5D00CB5B49 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
-		56B343232850ECA900CB5B49 /* GitHubProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubProfileModel.swift; sourceTree = "<group>"; };
 		56B343252850EF7F00CB5B49 /* LoginGitHubModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginGitHubModel.swift; sourceTree = "<group>"; };
 		56B343272850F1F000CB5B49 /* GitHubTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubTokenModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -116,9 +122,9 @@
 		564EE9CA28532CC100ACE183 /* GitHubModels */ = {
 			isa = PBXGroup;
 			children = (
-				56B343232850ECA900CB5B49 /* GitHubProfileModel.swift */,
 				56B343252850EF7F00CB5B49 /* LoginGitHubModel.swift */,
 				56B343272850F1F000CB5B49 /* GitHubTokenModel.swift */,
+				566D26D62858A4C200416EF1 /* GHUserProfileModel.swift */,
 			);
 			path = GitHubModels;
 			sourceTree = "<group>";
@@ -127,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				566C4258284F38A800DB91AF /* UIFont-Extension.swift */,
+				563965A72859F91500C127BB /* BasicSequenceOperation.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -154,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				564EE9C9285313B900ACE183 /* GitHub */,
+				566D27002858B5C400416EF1 /* KeyChainManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -215,8 +223,8 @@
 				56716F75284E02F300DAFE9F /* UI */,
 				56716F78284E030A00DAFE9F /* Managers */,
 				56716F7A284E034800DAFE9F /* ViewModels */,
-				566C4257284F388A00DB91AF /* Helpers */,
 				56B343202850EC4700CB5B49 /* Models */,
+				566C4257284F388A00DB91AF /* Helpers */,
 				56A34721284DEFE600CEFF73 /* SceneDelegate.swift */,
 				56A3471F284DEFE600CEFF73 /* AppDelegate.swift */,
 				56A3472D284DEFE800CEFF73 /* Info.plist */,
@@ -237,6 +245,7 @@
 			children = (
 				564EE9CA28532CC100ACE183 /* GitHubModels */,
 				56B343212850EC5D00CB5B49 /* AuthConstants.swift */,
+				566D27022858C34500416EF1 /* CredentialsModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -382,8 +391,8 @@
 				56716F7D284E0B8200DAFE9F /* AuthCoordinator.swift in Sources */,
 				56A34720284DEFE600CEFF73 /* AppDelegate.swift in Sources */,
 				566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */,
+				566D27032858C34600416EF1 /* CredentialsModel.swift in Sources */,
 				56716F9E284E324500DAFE9F /* AppCoordinator.swift in Sources */,
-				56B343242850ECA900CB5B49 /* GitHubProfileModel.swift in Sources */,
 				56A34722284DEFE600CEFF73 /* SceneDelegate.swift in Sources */,
 				56716FA8284E56CC00DAFE9F /* WelcomeViewModel.swift in Sources */,
 				56B343262850EF7F00CB5B49 /* LoginGitHubModel.swift in Sources */,
@@ -391,7 +400,10 @@
 				56716F90284E0DBD00DAFE9F /* LoginPageVC.swift in Sources */,
 				566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */,
 				56716F9C284E322000DAFE9F /* CoordinatorProtocol.swift in Sources */,
+				566D26D72858A4C200416EF1 /* GHUserProfileModel.swift in Sources */,
 				56716FA0284E348500DAFE9F /* LoginViewModel.swift in Sources */,
+				563965A82859F91500C127BB /* BasicSequenceOperation.swift in Sources */,
+				566D27012858B5C400416EF1 /* KeyChainManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
