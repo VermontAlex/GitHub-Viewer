@@ -15,7 +15,7 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
     static let identifier = "LoginPageVC"
     static let storyboardName = "LoginPage"
     
-    weak var coordinator: CoordinatorProtocol?
+    weak var coordinator: AuthCoordinator?
     var viewModel: LoginViewModel?
     var gitApiManager: GitHubNetworkManager?
     var webView: WKWebView!
@@ -101,15 +101,19 @@ extension LoginPageVC: WKNavigationDelegate {
                                               clientId: AuthConstants.cliendIdGH,
                                               clientSecret: AuthConstants.clientSecretGH)
             
-            gitApiManager?.gitHubSignIn(responseCode: code, authGHModel: loginModel, completion: { result in
+            gitApiManager?.gitHubSignIn(responseCode: code, authGHModel: loginModel, completion: { [weak self] result in
                 switch result {
                 case .success(let profile):
-                    print(profile.login)
+                    let viewModel = HomeTabViewModel(welcomeName: profile.login)
+                    DispatchQueue.main.async {
+                        self?.coordinator?.parentCoordinator?.goToHomeTabCoordinator(viewModel: viewModel)
+                    }
+                    self?.coordinator?.stop()
+                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             })
-            
             self.dismiss(animated: true, completion: nil)
         }
     }

@@ -9,6 +9,7 @@ import UIKit
 
 final class AuthCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
     
+    weak var parentCoordinator: AppCoordinator?
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
     
@@ -18,25 +19,14 @@ final class AuthCoordinator: NSObject, CoordinatorProtocol, UINavigationControll
     }
     
     func start() {
-        let loginViewModel = LoginViewModel()
         let vc = LoginPageVC.instantiateCustom(storyboard: LoginPageVC.storyboardName)
         vc.coordinator = self
         vc.gitApiManager = GitHubNetworkManager()
-        vc.viewModel = loginViewModel
+        vc.viewModel = LoginViewModel()
         navigationController.pushViewController(vc, animated: true)
     }
-    
+
     func stop() {
-        childDidFinish(self)
+        parentCoordinator?.childDidFinish(self)
     }
-    
-    func childDidFinish(_ coordinator : CoordinatorProtocol?){
-       // Call this if a coordinator is done.
-       for (index, child) in childCoordinators.enumerated() {
-           if child === coordinator {
-               childCoordinators.remove(at: index)
-               break
-           }
-       }
-   }
 }

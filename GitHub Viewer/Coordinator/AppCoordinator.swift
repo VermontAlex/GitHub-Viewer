@@ -8,33 +8,36 @@
 import UIKit
 
 class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
-    func stop() {
-        //Intentionaly left empty
-    }
     
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
     
-    init(navigationController : UINavigationController) {
+    required init(navigationController : UINavigationController) {
         self.navigationController = navigationController
     }
     
     func start() {
         navigationController.delegate = self
-        let welcomeViewModel = WelcomeViewModel()
         let vc = WelcomePageVC.instantiateCustom(storyboard: WelcomePageVC.storyboardName)
-        vc.viewModel = welcomeViewModel
+        vc.viewModel = WelcomeViewModel()
         vc.coordinator = self
         navigationController.pushViewController(vc, animated: false)
     }
     
     func goToAuthCoordinator() {
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
+        authCoordinator.parentCoordinator = self
         childCoordinators.append(authCoordinator)
         authCoordinator.start()
     }
     
-    func childDidFinish(_ coordinator : CoordinatorProtocol?){
+    func goToHomeTabCoordinator(viewModel: HomeTabViewModel) {
+        let homeTabCoordinator = HomeTabCoordinator(navigationController: navigationController, viewModel: viewModel)
+        childCoordinators.append(homeTabCoordinator)
+        homeTabCoordinator.start()
+    }
+    
+    func childDidFinish(_ coordinator : CoordinatorProtocol?) {
         // Call this if a coordinator is done.
         for (index, child) in childCoordinators.enumerated() {
             if child === coordinator {

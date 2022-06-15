@@ -9,8 +9,6 @@ import Foundation
 
 struct GitHubNetworkManager {
     
-    private let server = "github.com"
-    
     func gitHubSignIn(responseCode: String, authGHModel: LoginGitHubModel,
                       completion: @escaping (Result<GHUserProfileModel, Error>) -> Void) {
         guard let request = GitHubRequestBuilder.getAccessTokenRequest(authGHModel).request else { return }
@@ -21,7 +19,6 @@ struct GitHubNetworkManager {
         let tokenOperation = FetchToken(urlRequest: request) { result in
             switch result {
             case .success(let token):
-                print(token.accessToken)
                 accessToken = token
             case . failure(let error):
                 completion(.failure(error))
@@ -30,7 +27,7 @@ struct GitHubNetworkManager {
         
         tokenOperation.completionBlock = {
             guard let token = accessToken,
-                    let request = GitHubRequestBuilder.getUserProfile(accessToken: token).request
+                  let request = GitHubRequestBuilder.getUserProfile(accessToken: token).request
             else { return }
             
             let profileOperation = FetchProfile(urlRequest: request, completion: completion)
