@@ -25,6 +25,10 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
         fillInformation()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        coordinator?.stop()
+    }
+    
     private func fillInformation() {
         guard self.viewModel != nil else { return }
         self.loginPageTitle.text = viewModel?.title

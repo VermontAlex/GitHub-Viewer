@@ -17,11 +17,7 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
     }
     
     func start() {
-        navigationController.delegate = self
-        let vc = WelcomePageVC.instantiateCustom(storyboard: WelcomePageVC.storyboardName)
-        vc.viewModel = WelcomeViewModel()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
+        goToAuthCoordinator()
     }
     
     func goToAuthCoordinator() {
@@ -44,18 +40,6 @@ class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDeleg
                 childCoordinators.remove(at: index)
                 break
             }
-        }
-    }
-    
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        guard let fromViewController = navigationController.transitionCoordinator?.viewController(forKey: .from) else { return }
-        
-        if navigationController.viewControllers.contains(fromViewController) {
-            return
-        }
-        
-        if let loginPageViewController = fromViewController as? LoginPageVC {
-            self.childDidFinish(loginPageViewController.coordinator)
         }
     }
 }

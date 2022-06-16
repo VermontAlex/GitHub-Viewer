@@ -28,7 +28,7 @@ class HomeTabCoordinator: CoordinatorProtocol {
         let vc = HomeScreenVC.instantiateCustom(storyboard: HomeScreenVC.storyboardName)
         vc.coordinator = self
         vc.viewModel = viewModel
-        navigationController.pushViewController(vc, animated: true)
+        navigationController.present(vc, animated: true)
     }
     
     func stop() {
