@@ -26,7 +26,7 @@ final class AuthCoordinator: NSObject, CoordinatorProtocol, UINavigationControll
         navigationController.pushViewController(vc, animated: true)
     }
 
-    func stop() {
-        parentCoordinator?.childDidFinish(self)
+    func stop(andMoveTo: NextTabCoordinator? = nil) {
+        parentCoordinator?.childDidFinish(self, moveToNext: andMoveTo)
     }
 }

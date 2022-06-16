@@ -39,7 +39,6 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
     }
     
     func startAuthWebViewProcedure() {
-        //  Захендлить ошибку
         guard let authRequest = GitHubRequestBuilder.getAuthRequest(cliendId: AuthConstants.cliendIdGH).request else { return }
         let githubVC = UIViewController()
         
@@ -110,14 +109,13 @@ extension LoginPageVC: WKNavigationDelegate {
                 case .success(let profile):
                     let viewModel = HomeTabViewModel(welcomeName: profile.login)
                     DispatchQueue.main.async {
-                        self?.coordinator?.parentCoordinator?.goToHomeTabCoordinator(viewModel: viewModel)
+                        self?.coordinator?.stop(andMoveTo: .homeTab(viewModel: viewModel))
                     }
-                    self?.coordinator?.stop()
-                    
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             })
+            
             self.dismiss(animated: true, completion: nil)
         }
     }

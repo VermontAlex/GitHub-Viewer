@@ -17,9 +17,9 @@ class HomeTabCoordinator: CoordinatorProtocol {
     var childCoordinators: [CoordinatorProtocol] = []
     
     var navigationController: UINavigationController
-    var viewModel: HomeTabViewModel
+    var viewModel: HomeTabViewModel?
     
-    required init(navigationController : UINavigationController, viewModel: HomeTabViewModel) {
+    required init(navigationController : UINavigationController, viewModel: HomeTabViewModel?) {
         self.navigationController = navigationController
         self.viewModel = viewModel
     }
@@ -28,10 +28,11 @@ class HomeTabCoordinator: CoordinatorProtocol {
         let vc = HomeScreenVC.instantiateCustom(storyboard: HomeScreenVC.storyboardName)
         vc.coordinator = self
         vc.viewModel = viewModel
+        vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
     }
     
-    func stop() {
-        parentCoordinator?.childDidFinish(self)
+    func stop(andMoveTo: NextTabCoordinator? = nil) {
+        parentCoordinator?.childDidFinish(self, moveToNext: andMoveTo)
     }
 }
