@@ -107,9 +107,11 @@ extension LoginPageVC: WKNavigationDelegate {
             gitApiManager?.gitHubSignIn(responseCode: code, authGHModel: loginModel, completion: { [weak self] result in
                 switch result {
                 case .success(let profile):
-                    let viewModel = HomeTabViewModel(welcomeName: profile.login)
                     DispatchQueue.main.async {
-                        self?.coordinator?.stop(andMoveTo: .homeTab(viewModel: viewModel))
+                        self?.coordinator?.stop(andMoveTo: .homeTab(viewModel:
+                                                                        HomeTabViewModel(
+                                                                            account: profile,
+                                                                            server: AuthConstants.serviceGH)))
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

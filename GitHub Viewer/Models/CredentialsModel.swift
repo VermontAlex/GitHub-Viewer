@@ -9,6 +9,6 @@ import Foundation
 
 struct CredentialsModel {
     var account: String = ""
-    var personalToken = GitHubTokenModel(accessToken: "", tokenType: "", scope: "")
+    var personalToken: String = ""
     var server: String = ""
 }

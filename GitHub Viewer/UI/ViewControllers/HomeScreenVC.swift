@@ -20,10 +20,19 @@ class HomeScreenVC: UIViewController, StoryboardedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         fillHomeTab()
+        fetchRepoRelated()
+    }
+    
+    private func fetchRepoRelated() {
+        print(viewModel?.tokenToUse)
     }
     
     private func fillHomeTab() {
-        guard let viewModel = viewModel else { return }
-        welcomeLabel.text = viewModel.welcomeName
+        guard let viewModel = viewModel else { return fillHomeTabDefault() }
+        welcomeLabel.text = viewModel.account.login
+    }
+    
+    private func fillHomeTabDefault() {
+        welcomeLabel.text = "Welcome!"
     }
 }

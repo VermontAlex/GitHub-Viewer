@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct GHUserProfileModel: Codable {
+struct GHUserProfileModel: Codable, AccountViewModelProtocol {
     let login: String
 }

@@ -30,7 +30,9 @@ struct GitHubNetworkManager {
                   let request = GitHubRequestBuilder.getUserProfile(accessToken: token).request
             else { return }
             
-            let profileOperation = FetchProfile(urlRequest: request, completion: completion)
+            let profileOperation = FetchProfile(urlRequest: request,
+                                                token: token, completion: completion)
+            
             operationQueue.addOperation(profileOperation)
         }
         
@@ -82,13 +84,16 @@ private final class FetchToken: BasicSequenceOperation {
 
 private final class FetchProfile: BasicSequenceOperation {
     
-    init(urlRequest: URLRequest,
+    init(urlRequest: URLRequest, token: GitHubTokenModel,
          completion: @escaping (Result<GHUserProfileModel, Error>) -> Void) {
         super.init()
         task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
             if let data = data {
                 do {
                     let profile = try JSONDecoder().decode(GHUserProfileModel.self, from: data)
+                       try? KeyChainManager.save(credentials: CredentialsModel(account: profile.login,
+                                                                                personalToken: token.accessToken,
+                                                                                server: AuthConstants.serviceGH))
                         completion(.success(profile))
                         self?.state = .finished
                 } catch {

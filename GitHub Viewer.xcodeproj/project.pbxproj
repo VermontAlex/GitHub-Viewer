@@ -10,6 +10,7 @@
 		563965A82859F91500C127BB /* BasicSequenceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965A72859F91500C127BB /* BasicSequenceOperation.swift */; };
 		563965AA285A0C5B00C127BB /* HomeTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */; };
 		563965AC285A0D3200C127BB /* HomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965AB285A0D3200C127BB /* HomeTabCoordinator.swift */; };
+		563F671F285B497300A58BEA /* AccountViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */; };
 		566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C4258284F38A800DB91AF /* UIFont-Extension.swift */; };
 		566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */; };
 		566C425D284FA80800DB91AF /* GitHubRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */; };
@@ -55,6 +56,7 @@
 		563965A72859F91500C127BB /* BasicSequenceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSequenceOperation.swift; sourceTree = "<group>"; };
 		563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewModel.swift; sourceTree = "<group>"; };
 		563965AB285A0D3200C127BB /* HomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabCoordinator.swift; sourceTree = "<group>"; };
+		563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelProtocol.swift; sourceTree = "<group>"; };
 		566C4258284F38A800DB91AF /* UIFont-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont-Extension.swift"; sourceTree = "<group>"; };
 		566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager.swift; sourceTree = "<group>"; };
 		566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestBuilder.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				56716F9F284E348500DAFE9F /* LoginViewModel.swift */,
 				563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */,
+				563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				56B343262850EF7F00CB5B49 /* LoginGitHubModel.swift in Sources */,
 				56716F90284E0DBD00DAFE9F /* LoginPageVC.swift in Sources */,
 				566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */,
+				563F671F285B497300A58BEA /* AccountViewModelProtocol.swift in Sources */,
 				56716F9C284E322000DAFE9F /* CoordinatorProtocol.swift in Sources */,
 				566D26D72858A4C200416EF1 /* GHUserProfileModel.swift in Sources */,
 				56716FA0284E348500DAFE9F /* LoginViewModel.swift in Sources */,

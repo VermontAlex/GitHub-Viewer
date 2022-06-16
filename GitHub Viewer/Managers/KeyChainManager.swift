@@ -16,45 +16,44 @@ final class KeyChainManager {
         case unknown(OSStatus)
         case noPassword
         case unexpectedPasswordData
+        case invalidDataTypeReturned
     }
+    
     static func save(credentials: CredentialsModel) throws {
-        guard let accessToken = credentials.personalToken.accessToken.data(using: String.Encoding.utf8) else { throw KeychainError.invalidToken }
+        guard let accessToken = credentials.personalToken.data(using: String.Encoding.utf8) else { throw KeychainError.invalidToken }
         
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassInternetPassword,
-            kSecAttrAccount as String: credentials.account,
-            kSecAttrServer as String: credentials.server,
-            kSecValueData as String: accessToken
+        let query: [String: AnyObject] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrAccount as String: credentials.account as AnyObject,
+            kSecAttrService as String: credentials.server as AnyObject,
+            kSecValueData as String: accessToken as AnyObject
         ]
         
         let status = SecItemAdd(query as CFDictionary, nil)
         
         guard status != errSecDuplicateItem else { throw KeychainError.duplicateEntry }
-        guard status == errSecSuccess else { throw KeychainError.unknown(status) }
+        guard status == errSecSuccess else {
+            throw KeychainError.unknown(status)
+        }
     }
     
-//    static func get(account: String, service: String) throws -> CredentialsModel {
-//        let query: [String: Any] = [
-//            kSecClass as String: kSecClassInternetPassword,
-//            kSecAttrAccount as String: account,
-//            kSecAttrServer as String: service,
-//            kSecMatchLimit as String: kSecMatchLimitOne,
-//            kSecReturnData as String: kCFBooleanTrue ?? true
-//        ]
-//        
-//        var result: CFTypeRef?
-//        let status = SecItemCopyMatching(query as CFDictionary, &result)
-//        
-//        guard status != errSecItemNotFound else { throw KeychainError.noPassword}
-//        guard status == errSecSuccess else { throw KeychainError.unhandledError(status)}
-//        
-//        guard let existingItem = result as? [String: Any],
-//              let tokenData = existingItem[kSecValueData as String] as? Data,
-//              let token = String(data: tokenData, encoding: String.Encoding.utf8),
-//              let account = existingItem[kSecAttrAccount as String] as? String,
-//              let server = existingItem[kSecAttrServer as String] as? String
-//        else { throw KeychainError.unexpectedPasswordData }
-//        
-//        return CredentialsModel(account: account, personalToken: token, server: server)
-//    }
+    static func get(account: String, service: String) throws -> Data {
+        
+        let query: [String: AnyObject] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service as AnyObject,
+            kSecAttrAccount as String: account as AnyObject,
+            kSecReturnData as String: kCFBooleanTrue,
+            kSecMatchLimit as String: kSecMatchLimitOne,
+        ]
+        
+        var result: AnyObject?
+        let status = SecItemCopyMatching(query as CFDictionary, &result)
+        
+        guard status != errSecItemNotFound else { throw KeychainError.noPassword }
+        guard status == errSecSuccess else { throw KeychainError.unhandledError(status) }
+        guard let result = result as? Data else { throw KeychainError.invalidDataTypeReturned }
+        
+        return result
+    }
 }

@@ -35,7 +35,8 @@ final class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControlle
     }
     
     func goToHomeTabCoordinator(viewModel: HomeTabViewModel?) {
-        let homeTabCoordinator = HomeTabCoordinator(navigationController: navigationController, viewModel: viewModel)
+        let homeTabCoordinator = HomeTabCoordinator(navigationController: navigationController,
+                                                    viewModel: viewModel)
         childCoordinators.append(homeTabCoordinator)
         homeTabCoordinator.start()
     }
