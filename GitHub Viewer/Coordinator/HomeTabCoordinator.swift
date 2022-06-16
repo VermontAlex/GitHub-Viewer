@@ -11,7 +11,7 @@ protocol HomeTabCoordinatorProtocol {
     func start(viewModel: HomeTabViewModel)
 }
 
-class HomeTabCoordinator: CoordinatorProtocol {
+final class HomeTabCoordinator: CoordinatorProtocol {
     
     weak var parentCoordinator: AppCoordinator?
     var childCoordinators: [CoordinatorProtocol] = []
@@ -19,7 +19,7 @@ class HomeTabCoordinator: CoordinatorProtocol {
     var navigationController: UINavigationController
     var viewModel: HomeTabViewModel?
     
-    required init(navigationController : UINavigationController, viewModel: HomeTabViewModel?) {
+    init(navigationController : UINavigationController, viewModel: HomeTabViewModel?) {
         self.navigationController = navigationController
         self.viewModel = viewModel
     }

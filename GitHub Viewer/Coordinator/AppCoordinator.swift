@@ -12,7 +12,7 @@ enum NextTabCoordinator {
     case homeTab(viewModel: HomeTabViewModel?)
 }
 
-class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
+final class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControllerDelegate {
     
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController

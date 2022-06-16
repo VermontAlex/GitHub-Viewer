@@ -9,7 +9,6 @@ import UIKit
 
 class HomeScreenVC: UIViewController, StoryboardedProtocol {
     
-    
     @IBOutlet var welcomeLabel: UILabel!
     
     static let identifier = "HomeScreenVC"
