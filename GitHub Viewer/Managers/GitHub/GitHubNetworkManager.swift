@@ -9,9 +9,10 @@ import Foundation
 
 struct GitHubNetworkManager {
     
-    func gitHubSignIn(responseCode: String, authGHModel: LoginGitHubModel,
+    func gitHubSignIn(responseCode: String,
                       completion: @escaping (Result<GHUserProfileModel, Error>) -> Void) {
-        guard let request = GitHubRequestBuilder.getAccessTokenRequest(authGHModel).request else { return }
+        guard let request = GitHubRequestBuilder.getAccessTokenRequest(responseCode: responseCode).request
+        else { return }
         
         let operationQueue = OperationQueue()
         var accessToken: GitHubTokenModel?

@@ -9,7 +9,7 @@ import Foundation
 
 enum GitHubRequestBuilder {
     
-    case getAccessTokenRequest(LoginGitHubModel)
+    case getAccessTokenRequest(responseCode: String)
     case getAuthRequest(cliendId: String)
     case getUserProfile(accessToken: GitHubTokenModel)
     
@@ -37,9 +37,9 @@ enum GitHubRequestBuilder {
         case .getAuthRequest(let cliendId):
             guard let url = formSignInUrl(cliendId: cliendId) else { return nil }
             return URLRequest(url: url)
-        case .getAccessTokenRequest(let authGHModel):
+        case .getAccessTokenRequest(let responseCode):
             guard let url = URL(string: path, relativeTo: URL(string: baseUrl)) else { return nil }
-            let httpBody = try? JSONEncoder().encode(authGHModel)
+            let httpBody = try? JSONEncoder().encode(LoginGitHubModel(code: responseCode))
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             request.httpBody = httpBody

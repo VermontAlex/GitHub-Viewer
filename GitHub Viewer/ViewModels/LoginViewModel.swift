@@ -6,5 +6,12 @@
 //
 
 struct LoginViewModel {
-    var title: String = "Please signIn with GitHub Account"
+    
+    let title: String = "Please signIn with GitHub Account."
+    let titleConnection = "Network connection isn't available, please switch it on or try again later."
+    var isAbleConnection: Bool {
+        get {
+            InternetReachability.isConnectedToNetwork()
+        }
+    }
 }

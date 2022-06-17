@@ -33,6 +33,7 @@ final class KeyChainManager {
         
         guard status != errSecDuplicateItem else { throw KeychainError.duplicateEntry }
         guard status == errSecSuccess else {
+            ErrorHandlerService.errorKeyChain(status).handleErrorWithDB()
             throw KeychainError.unknown(status)
         }
     }
@@ -51,7 +52,9 @@ final class KeyChainManager {
         let status = SecItemCopyMatching(query as CFDictionary, &result)
         
         guard status != errSecItemNotFound else { throw KeychainError.noPassword }
-        guard status == errSecSuccess else { throw KeychainError.unhandledError(status) }
+        guard status == errSecSuccess else {
+            ErrorHandlerService.errorKeyChain(status).handleErrorWithDB()
+            throw KeychainError.unhandledError(status) }
         guard let result = result as? Data else { throw KeychainError.invalidDataTypeReturned }
         
         return result

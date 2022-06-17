@@ -9,10 +9,10 @@ import Foundation
 
 struct LoginGitHubModel: Codable {
     
-    let grantType: String
+    let grantType: String =  AuthConstants.grantType
     let code: String
-    let clientId: String
-    let clientSecret: String
+    let clientId: String = AuthConstants.cliendIdGH
+    let clientSecret: String = AuthConstants.clientSecretGH
     let state: String? = nil
     
     private enum CodingKeys : String, CodingKey {

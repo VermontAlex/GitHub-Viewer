@@ -11,6 +11,7 @@ import WebKit
 class LoginPageVC: UIViewController, StoryboardedProtocol {
     
     @IBOutlet var loginPageTitle: UILabel!
+    @IBOutlet var loginGitHubButton: UIButton!
     
     static let identifier = "LoginPageVC"
     static let storyboardName = "LoginPage"
@@ -18,28 +19,28 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
     weak var coordinator: AuthCoordinator?
     var viewModel: LoginViewModel?
     var gitApiManager: GitHubNetworkManager?
-    var webView: WKWebView!
+    
+    private var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         fillInformation()
     }
     
-    override func viewDidDisappear(_ animated: Bool) {
-        coordinator?.stop()
-    }
-    
     private func fillInformation() {
-        guard self.viewModel != nil else { return }
-        self.loginPageTitle.text = viewModel?.title
+        guard let viewModel = viewModel else { return }
+        let isConnected = viewModel.isAbleConnection
+        self.loginGitHubButton.isHidden = !isConnected
+        self.loginPageTitle.text = isConnected ? viewModel.title : viewModel.titleConnection
     }
     
     @IBAction func loginWithGitHub(_ sender: Any) {
         startAuthWebViewProcedure()
     }
     
-    func startAuthWebViewProcedure() {
+    private func startAuthWebViewProcedure() {
         guard let authRequest = GitHubRequestBuilder.getAuthRequest(cliendId: AuthConstants.cliendIdGH).request else { return }
+        
         let githubVC = UIViewController()
         
         webView = WKWebView()
@@ -74,6 +75,7 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
         
         let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.cancelAction))
         let refreshButton = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(self.refreshAction))
+        
         gitHubWebView.navigationItem.leftBarButtonItem = cancelButton
         gitHubWebView.navigationItem.rightBarButtonItem = refreshButton
         
@@ -98,23 +100,19 @@ extension LoginPageVC: WKNavigationDelegate {
         decisionHandler(.allow)
         if let responseUrl = checkAuthResult(request: navigationAction.request) {
             guard let code = parseGitHubSignInResponse(url: responseUrl) else { return }
-            
-            let loginModel = LoginGitHubModel(grantType: AuthConstants.grantType,
-                                              code: code,
-                                              clientId: AuthConstants.cliendIdGH,
-                                              clientSecret: AuthConstants.clientSecretGH)
-            
-            gitApiManager?.gitHubSignIn(responseCode: code, authGHModel: loginModel, completion: { [weak self] result in
+            gitApiManager?.gitHubSignIn(responseCode: code, completion: { [weak self] result in
                 switch result {
                 case .success(let profile):
                     DispatchQueue.main.async {
                         self?.coordinator?.stop(andMoveTo: .homeTab(viewModel:
                                                                         HomeTabViewModel(
                                                                             account: profile,
-                                                                            server: AuthConstants.serviceGH, customTransition: nil)))
+                                                                            service: AuthConstants.serviceGH)))
                     }
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                    self?.showError(alert: ErrorHandlerService.error(error).handleErrorWithUI())
+                    }
                 }
             })
             
@@ -138,6 +136,16 @@ extension LoginPageVC: WKNavigationDelegate {
                 return result
             }
         }
+        DispatchQueue.main.async {
+            self.dismiss(animated: true) {
+                self.showError(alert: ErrorHandlerService.unknownedError.handleErrorWithUI())
+            }
+        }
         return nil
+    }
+    
+    private func showError(alert: UIAlertController?) {
+        guard let alert = alert else { return }
+        self.present(alert, animated: true, completion: nil)
     }
 }

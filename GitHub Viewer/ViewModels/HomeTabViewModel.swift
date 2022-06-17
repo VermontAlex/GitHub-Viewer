@@ -19,9 +19,9 @@ struct HomeTabViewModel {
         }
     }
     
-    init(account: AccountViewModelProtocol, server: String, customTransition: UIViewControllerTransitioningDelegate?) {
+    init(account: AccountViewModelProtocol, service: String, customTransition: UIViewControllerTransitioningDelegate? = nil) {
         self.account = account
-        self.service = server
+        self.service = service
         self.customTransition = customTransition
     }
     

@@ -41,6 +41,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginGitHubButton" destination="zvC-W6-yxI" id="MPH-eo-2WA"/>
                         <outlet property="loginPageTitle" destination="xR9-HI-HAy" id="dW0-hx-3cV"/>
                     </connections>
                 </viewController>
