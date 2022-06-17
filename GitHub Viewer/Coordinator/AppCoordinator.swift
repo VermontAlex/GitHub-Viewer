@@ -20,7 +20,7 @@ final class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControlle
     init(navigationController : UINavigationController) {
         self.navigationController = navigationController
         navigationController.navigationBar.isHidden = true
-        navigationController.view.backgroundColor = .systemBackground
+        navigationController.view.backgroundColor = UIColor(named: "creamBlueColor")
     }
     
     func start() {
