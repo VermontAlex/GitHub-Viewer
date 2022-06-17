@@ -21,11 +21,12 @@ final class HomeTabCoordinator: CoordinatorProtocol {
     
     init(navigationController : UINavigationController, viewModel: HomeTabViewModel?) {
         self.navigationController = navigationController
+        navigationController.view = RootDefaultView()
         self.viewModel = viewModel
     }
     
     func start() {
-        let transitionAnimation = CustomTransitionAnimaionHomePage(transitionDuration: 0.8)
+        let transitionAnimation = CustomTransitionAnimaionHomePage(transitionDuration: 1)
         let transitionManager = CustomTransitionManager(transitionAnimation: transitionAnimation)
         viewModel?.customTransition = transitionManager
         

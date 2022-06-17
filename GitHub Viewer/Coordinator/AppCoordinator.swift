@@ -17,10 +17,8 @@ final class AppCoordinator: NSObject, CoordinatorProtocol, UINavigationControlle
     var childCoordinators: [CoordinatorProtocol] = []
     var navigationController: UINavigationController
     
-    init(navigationController : UINavigationController) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        navigationController.navigationBar.isHidden = true
-        navigationController.view.backgroundColor = UIColor(named: "creamBlueColor")
     }
     
     func start() {
