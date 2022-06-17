@@ -30,6 +30,7 @@ class HomeScreenVC: UIViewController, StoryboardedProtocol {
     private func fillHomeTab() {
         guard let viewModel = viewModel else { return fillHomeTabDefault() }
         welcomeLabel.text = viewModel.account.login
+        self.transitioningDelegate = viewModel.customTransition
     }
     
     private func fillHomeTabDefault() {

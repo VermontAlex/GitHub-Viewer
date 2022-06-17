@@ -11,6 +11,8 @@
 		563965AA285A0C5B00C127BB /* HomeTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */; };
 		563965AC285A0D3200C127BB /* HomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965AB285A0D3200C127BB /* HomeTabCoordinator.swift */; };
 		563F671F285B497300A58BEA /* AccountViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */; };
+		563F6721285B6B9000A58BEA /* CustomTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F6720285B6B9000A58BEA /* CustomTransitionManager.swift */; };
+		563F6723285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F6722285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift */; };
 		566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C4258284F38A800DB91AF /* UIFont-Extension.swift */; };
 		566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */; };
 		566C425D284FA80800DB91AF /* GitHubRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */; };
@@ -57,6 +59,8 @@
 		563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewModel.swift; sourceTree = "<group>"; };
 		563965AB285A0D3200C127BB /* HomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabCoordinator.swift; sourceTree = "<group>"; };
 		563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelProtocol.swift; sourceTree = "<group>"; };
+		563F6720285B6B9000A58BEA /* CustomTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionManager.swift; sourceTree = "<group>"; };
+		563F6722285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimationHomePage.swift; sourceTree = "<group>"; };
 		566C4258284F38A800DB91AF /* UIFont-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont-Extension.swift"; sourceTree = "<group>"; };
 		566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager.swift; sourceTree = "<group>"; };
 		566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestBuilder.swift; sourceTree = "<group>"; };
@@ -110,6 +114,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		563F6726285B6CDA00A58BEA /* CustomTransitionManager */ = {
+			isa = PBXGroup;
+			children = (
+				563F6720285B6B9000A58BEA /* CustomTransitionManager.swift */,
+				563F6722285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift */,
+			);
+			path = CustomTransitionManager;
+			sourceTree = "<group>";
+		};
 		564EE9C9285313B900ACE183 /* GitHub */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,6 +172,7 @@
 		56716F78284E030A00DAFE9F /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				563F6726285B6CDA00A58BEA /* CustomTransitionManager */,
 				564EE9C9285313B900ACE183 /* GitHub */,
 				566D27002858B5C400416EF1 /* KeyChainManager.swift */,
 			);
@@ -388,9 +402,11 @@
 				56716F7F284E0BE900DAFE9F /* StoryboardedProtocol.swift in Sources */,
 				56B343282850F1F000CB5B49 /* GitHubTokenModel.swift in Sources */,
 				56716F7D284E0B8200DAFE9F /* AuthCoordinator.swift in Sources */,
+				563F6723285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift in Sources */,
 				563965AC285A0D3200C127BB /* HomeTabCoordinator.swift in Sources */,
 				56A34720284DEFE600CEFF73 /* AppDelegate.swift in Sources */,
 				566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */,
+				563F6721285B6B9000A58BEA /* CustomTransitionManager.swift in Sources */,
 				566D27032858C34600416EF1 /* CredentialsModel.swift in Sources */,
 				56716F9E284E324500DAFE9F /* AppCoordinator.swift in Sources */,
 				563965AA285A0C5B00C127BB /* HomeTabViewModel.swift in Sources */,

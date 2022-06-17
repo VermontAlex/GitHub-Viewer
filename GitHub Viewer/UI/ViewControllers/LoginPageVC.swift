@@ -111,7 +111,7 @@ extension LoginPageVC: WKNavigationDelegate {
                         self?.coordinator?.stop(andMoveTo: .homeTab(viewModel:
                                                                         HomeTabViewModel(
                                                                             account: profile,
-                                                                            server: AuthConstants.serviceGH)))
+                                                                            server: AuthConstants.serviceGH, customTransition: nil)))
                     }
                 case .failure(let error):
                     print(error.localizedDescription)

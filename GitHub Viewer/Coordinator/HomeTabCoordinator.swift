@@ -25,10 +25,14 @@ final class HomeTabCoordinator: CoordinatorProtocol {
     }
     
     func start() {
+        let transitionAnimation = CustomTransitionAnimaionHomePage(transitionDuration: 0.8)
+        let transitionManager = CustomTransitionManager(transitionAnimation: transitionAnimation)
+        viewModel?.customTransition = transitionManager
+        
         let vc = HomeScreenVC.instantiateCustom(storyboard: HomeScreenVC.storyboardName)
+        vc.modalPresentationStyle = .fullScreen
         vc.coordinator = self
         vc.viewModel = viewModel
-        vc.modalPresentationStyle = .fullScreen
         navigationController.present(vc, animated: true)
     }
     
