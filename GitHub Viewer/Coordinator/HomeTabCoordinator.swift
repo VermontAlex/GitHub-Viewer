@@ -30,7 +30,7 @@ final class HomeTabCoordinator: CoordinatorProtocol {
         let transitionManager = CustomTransitionManager(transitionAnimation: transitionAnimation)
         viewModel?.customTransition = transitionManager
         
-        let vc = HomeScreenVC.instantiateCustom(storyboard: HomeScreenVC.storyboardName)
+        let vc = HomeTabPageVC.instantiateCustom(storyboard: HomeTabPageVC.storyboardName)
         vc.modalPresentationStyle = .fullScreen
         vc.coordinator = self
         vc.viewModel = viewModel

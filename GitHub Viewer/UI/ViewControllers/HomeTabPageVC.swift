@@ -7,12 +7,13 @@
 
 import UIKit
 
-class HomeScreenVC: UIViewController, StoryboardedProtocol {
+class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     
+    @IBOutlet var repoTableView: UITableView!
     @IBOutlet var welcomeLabel: UILabel!
     
-    static let identifier = "HomeScreenVC"
-    static let storyboardName = "HomeScreen"
+    static let identifier = "HomeTabPageVC"
+    static let storyboardName = "HomeTabPage"
     
     weak var coordinator: CoordinatorProtocol?
     var viewModel: HomeTabViewModel?
@@ -20,11 +21,12 @@ class HomeScreenVC: UIViewController, StoryboardedProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         fillHomeTab()
-        fetchRepoRelated()
+        configureTableView()
     }
     
-    private func fetchRepoRelated() {
-        print(viewModel?.tokenToUse)
+    private func configureTableView() {
+        guard let viewModel = viewModel else { return }
+        
     }
     
     private func fillHomeTab() {
