@@ -41,6 +41,20 @@ struct GitHubNetworkManager {
         
         operationQueue.waitUntilAllOperationsAreFinished()
     }
+    
+    func searchForRepos(byName: String, token: String, completion: @escaping (Result<RepoSearchResult, Error>) -> Void) {
+        guard let request = GitHubRequestBuilder.fetchRepoItems(searchBy: "GitHub-Viewer", page: 1, token: token).request else { return }
+        let operationQueue = OperationQueue()
+        let fetchReposOperation = FetchRepos(urlRequest: request) { result in
+            switch result {
+            case .success(let result):
+                completion(.success(result))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+        operationQueue.addOperation(fetchReposOperation)
+    }
 }
 
 private final class FetchToken: BasicSequenceOperation {
@@ -96,6 +110,46 @@ private final class FetchProfile: BasicSequenceOperation {
                                                                                 personalToken: token.accessToken,
                                                                                 server: AuthConstants.serviceGH))
                         completion(.success(profile))
+                        self?.state = .finished
+                } catch {
+                        completion(.failure(error))
+                        self?.state = .finished
+                }
+            } else if let error = error {
+                    completion(.failure(error))
+                    self?.state = .finished
+            }
+            self?.state = .finished
+        })
+    }
+    
+    override func start() {
+        if isCancelled {
+            state = .finished
+            return
+        }
+        
+        state = .executing
+        
+        self.task?.resume()
+    }
+    
+    override func cancel() {
+        super.cancel()
+        self.task?.cancel()
+    }
+}
+
+private final class FetchRepos: BasicSequenceOperation {
+    
+    init(urlRequest: URLRequest,
+         completion: @escaping (Result<RepoSearchResult, Error>) -> Void) {
+        super.init()
+        task = URLSession.shared.dataTask(with: urlRequest, completionHandler: { [weak self] (data, response, error) in
+            if let data = data {
+                do {
+                    let repos = try JSONDecoder().decode(RepoSearchResult.self, from: data)
+                        completion(.success(repos))
                         self?.state = .finished
                 } catch {
                         completion(.failure(error))

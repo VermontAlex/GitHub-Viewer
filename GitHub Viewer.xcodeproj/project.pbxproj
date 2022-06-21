@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		5634AF3E285DCD4F00979F61 /* RepoTableItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5634AF3C285DCD4F00979F61 /* RepoTableItemCell.swift */; };
 		5634AF3F285DCD4F00979F61 /* RepoTableItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5634AF3D285DCD4F00979F61 /* RepoTableItemCell.xib */; };
-		5634AF41285DD4A200979F61 /* RepoItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5634AF40285DD4A200979F61 /* RepoItemViewModel.swift */; };
+		5634AF43285DF54500979F61 /* RepoItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5634AF42285DF54500979F61 /* RepoItemModel.swift */; };
 		563965A82859F91500C127BB /* BasicSequenceOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965A72859F91500C127BB /* BasicSequenceOperation.swift */; };
 		563965AA285A0C5B00C127BB /* HomeTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */; };
 		563965AC285A0D3200C127BB /* HomeTabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563965AB285A0D3200C127BB /* HomeTabCoordinator.swift */; };
@@ -64,7 +64,7 @@
 /* Begin PBXFileReference section */
 		5634AF3C285DCD4F00979F61 /* RepoTableItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoTableItemCell.swift; sourceTree = "<group>"; };
 		5634AF3D285DCD4F00979F61 /* RepoTableItemCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RepoTableItemCell.xib; sourceTree = "<group>"; };
-		5634AF40285DD4A200979F61 /* RepoItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemViewModel.swift; sourceTree = "<group>"; };
+		5634AF42285DF54500979F61 /* RepoItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemModel.swift; sourceTree = "<group>"; };
 		563965A72859F91500C127BB /* BasicSequenceOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicSequenceOperation.swift; sourceTree = "<group>"; };
 		563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewModel.swift; sourceTree = "<group>"; };
 		563965AB285A0D3200C127BB /* HomeTabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabCoordinator.swift; sourceTree = "<group>"; };
@@ -169,6 +169,7 @@
 				56B343252850EF7F00CB5B49 /* LoginGitHubModel.swift */,
 				56B343272850F1F000CB5B49 /* GitHubTokenModel.swift */,
 				566D26D62858A4C200416EF1 /* GHUserProfileModel.swift */,
+				5634AF42285DF54500979F61 /* RepoItemModel.swift */,
 			);
 			path = GitHubModels;
 			sourceTree = "<group>";
@@ -230,7 +231,6 @@
 				56716F9F284E348500DAFE9F /* LoginViewModel.swift */,
 				563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */,
 				563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */,
-				5634AF40285DD4A200979F61 /* RepoItemViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -450,7 +450,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5634AF41285DD4A200979F61 /* RepoItemViewModel.swift in Sources */,
 				56B343222850EC5D00CB5B49 /* AuthConstants.swift in Sources */,
 				5682FA93285C726F00250C40 /* InternetReachability.swift in Sources */,
 				566C425D284FA80800DB91AF /* GitHubRequestBuilder.swift in Sources */,
@@ -468,6 +467,7 @@
 				56716F9E284E324500DAFE9F /* AppCoordinator.swift in Sources */,
 				563965AA285A0C5B00C127BB /* HomeTabViewModel.swift in Sources */,
 				56A34722284DEFE600CEFF73 /* SceneDelegate.swift in Sources */,
+				5634AF43285DF54500979F61 /* RepoItemModel.swift in Sources */,
 				5634AF3E285DCD4F00979F61 /* RepoTableItemCell.swift in Sources */,
 				56B343262850EF7F00CB5B49 /* LoginGitHubModel.swift in Sources */,
 				56716F90284E0DBD00DAFE9F /* LoginPageVC.swift in Sources */,

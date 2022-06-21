@@ -29,9 +29,18 @@ final class KeyChainManager {
             kSecValueData as String: accessToken as AnyObject
         ]
         
-        let status = SecItemAdd(query as CFDictionary, nil)
+        var status = SecItemAdd(query as CFDictionary, nil)
         
-        guard status != errSecDuplicateItem else { throw KeychainError.duplicateEntry }
+        if status == errSecDuplicateItem {
+            let attributes: [String: AnyObject] = [
+                kSecAttrAccount as String: credentials.account as AnyObject,
+                kSecAttrService as String: credentials.server as AnyObject,
+                kSecValueData as String: accessToken as AnyObject]
+            
+            status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+            print(status)
+        }
+        
         guard status == errSecSuccess else {
             ErrorHandlerService.errorKeyChain(status).handleErrorWithDB()
             throw KeychainError.unknown(status)
@@ -42,8 +51,8 @@ final class KeyChainManager {
         
         let query: [String: AnyObject] = [
             kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service as AnyObject,
             kSecAttrAccount as String: account as AnyObject,
+            kSecAttrService as String: service as AnyObject,
             kSecReturnData as String: kCFBooleanTrue,
             kSecMatchLimit as String: kSecMatchLimitOne,
         ]

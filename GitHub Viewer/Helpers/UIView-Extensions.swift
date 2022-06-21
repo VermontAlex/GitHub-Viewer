@@ -8,6 +8,18 @@
 import UIKit
 
 public extension UIView {
+    
+    class var className: String {
+        let stringClassName = NSStringFromClass(self)
+        guard let range = stringClassName.range(of: ".") else { return "" }
+        
+        return String(stringClassName[range.upperBound...])
+    }
+    
+    class func nib() -> UINib {
+        return UINib(nibName: className, bundle: Bundle(for: self))
+    }
+    
     func addEdgeConstrainsToSuperview(insets: UIEdgeInsets = .zero) {
         guard let superview = superview else { return }
         

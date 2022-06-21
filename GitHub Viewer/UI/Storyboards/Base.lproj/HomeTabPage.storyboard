@@ -19,20 +19,23 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tj1-xA-RDI">
                                 <rect key="frame" x="0.0" y="98.5" width="1194" height="715.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" name="creamBlueColor"/>
+                                <color key="sectionIndexBackgroundColor" name="creamBlueColor"/>
                             </tableView>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="YUt-7w-P0r">
-                                <rect key="frame" x="1127" y="24" width="67" height="31"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="YUt-7w-P0r">
+                                <rect key="frame" x="1125" y="24" width="69" height="31"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OCd-mL-iCJ">
-                                        <rect key="frame" x="0.0" y="0.0" width="67" height="31"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="69" height="31"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Search"/>
                                     </button>
                                 </subviews>
                             </stackView>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="hn6-VN-cu4">
-                                <rect key="frame" x="0.0" y="24" width="1127" height="51"/>
+                                <rect key="frame" x="0.0" y="24" width="1125" height="51"/>
+                                <color key="backgroundColor" name="creamBlueColor"/>
+                                <color key="barTintColor" name="creamBlueColor"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-fy-IBV" userLabel="SeparatorView">
@@ -44,7 +47,7 @@
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Label(~)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fE-y9-ryc">
                                 <rect key="frame" x="0.0" y="75" width="1194" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -54,6 +57,7 @@
                         <constraints>
                             <constraint firstItem="YUt-7w-P0r" firstAttribute="leading" secondItem="hn6-VN-cu4" secondAttribute="trailing" id="2wI-oh-1VN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tj1-xA-RDI" secondAttribute="bottom" id="6kW-Id-rRL"/>
+                            <constraint firstItem="YUt-7w-P0r" firstAttribute="height" secondItem="hn6-VN-cu4" secondAttribute="height" multiplier="0.607843" id="8WU-WA-qAs"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iQC-fy-IBV" secondAttribute="trailing" id="Jid-ix-aoq"/>
                             <constraint firstItem="hn6-VN-cu4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OKP-bV-S2y"/>
                             <constraint firstItem="hn6-VN-cu4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ORD-o7-n8a"/>
@@ -71,6 +75,7 @@
                     </view>
                     <connections>
                         <outlet property="repoTableView" destination="tj1-xA-RDI" id="m3i-1v-JFK"/>
+                        <outlet property="searchBar" destination="hn6-VN-cu4" id="rYe-ct-ucl"/>
                         <outlet property="welcomeLabel" destination="3fE-y9-ryc" id="07S-vv-vKi"/>
                     </connections>
                 </viewController>
@@ -83,9 +88,6 @@
         <namedColor name="creamBlueColor">
             <color red="0.95300000905990601" green="0.98400002717971802" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
