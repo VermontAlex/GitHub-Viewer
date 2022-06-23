@@ -34,4 +34,24 @@ public extension UIView {
         
         NSLayoutConstraint.activate(constraints)
     }
+    
+    func dropShadow(cornerRadius: CGFloat,
+                    shadowRadius: CGFloat? = nil,
+                    backgroundColor: UIColor? = nil,
+                    color: UIColor = UIColor(white: 0, alpha: 0.175),
+                    opacity: Float,
+                    size: CGSize) {
+        
+        if let bgColor = backgroundColor {
+            self.backgroundColor = .clear
+            layer.backgroundColor = bgColor.cgColor
+        }
+        
+        layer.masksToBounds = false
+        layer.cornerRadius = cornerRadius
+        layer.shadowColor = color.cgColor
+        layer.shadowOpacity = opacity
+        layer.shadowRadius = shadowRadius ?? cornerRadius
+        layer.shadowOffset = size
+    }
 }

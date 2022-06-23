@@ -20,7 +20,7 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     var viewModel: HomeTabViewModel?
     
     private let gitManager = GitHubNetworkManager()
-    private var searchedRepo = [RepoItemModel]()
+    private var searchedRepo = [RepoItemCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +46,11 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
                                   token: token) { result in
             switch result {
             case .success(let repos):
-                self.searchedRepo.append(contentsOf: repos.items)
+                
+                let reposViewModel = repos.items.map { repo in
+                    return RepoItemCellViewModel(repo: repo)
+                }
+                self.searchedRepo.append(contentsOf: reposViewModel)
                 DispatchQueue.main.async {
                     self.repoTableView.reloadData()
                 }
@@ -78,9 +82,32 @@ extension HomeTabPageVC: UITableViewDelegate, UITableViewDataSource {
         let cell = repoTableView.dequeueReusableCell(withIdentifier: RepoTableItemCell.cellReuseIdentifier, for: indexPath)
         if let cell = cell as? RepoTableItemCell {
             let viewModel = searchedRepo[indexPath.row]
-            cell.setupWith(repo: viewModel)
+            cell.setupWith(viewModel: viewModel)
+            cell.delegate = self
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return  UITableView.automaticDimension
+    }
+}
+
+extension HomeTabPageVC: RepoItemCellDelegate {
+    
+    func updateCellHeight(vm: RepoItemCellViewModel?, inBlock: () -> Void) {
+        if let vm = vm {
+            for cellViewModel in searchedRepo {
+                if cellViewModel === vm {
+                    continue
+                }
+
+                cellViewModel.expanded = false
+            }
+        }
+
+        inBlock()
+        self.repoTableView.reloadData()
     }
 }

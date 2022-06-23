@@ -37,6 +37,7 @@
 		56A34727284DEFE600CEFF73 /* HomeTabPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A34725284DEFE600CEFF73 /* HomeTabPage.storyboard */; };
 		56A34729284DEFE800CEFF73 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56A34728284DEFE800CEFF73 /* Assets.xcassets */; };
 		56A3472C284DEFE800CEFF73 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56A3472A284DEFE800CEFF73 /* LaunchScreen.storyboard */; };
+		56A7CB3F286219E400DF0027 /* RepoItemCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A7CB3E286219E400DF0027 /* RepoItemCellViewModel.swift */; };
 		56AB6CC1285CAFB100DD6C78 /* RootDefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AB6CC0285CAFB100DD6C78 /* RootDefaultView.swift */; };
 		56AB6CC3285CB11500DD6C78 /* UIView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56AB6CC2285CB11500DD6C78 /* UIView-Extensions.swift */; };
 		56B343222850EC5D00CB5B49 /* AuthConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B343212850EC5D00CB5B49 /* AuthConstants.swift */; };
@@ -96,6 +97,7 @@
 		56A3472D284DEFE800CEFF73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56A34732284DEFE800CEFF73 /* GitHub ViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHub ViewerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A3473C284DEFE800CEFF73 /* GitHub ViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHub ViewerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A7CB3E286219E400DF0027 /* RepoItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemCellViewModel.swift; sourceTree = "<group>"; };
 		56AB6CC0285CAFB100DD6C78 /* RootDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootDefaultView.swift; sourceTree = "<group>"; };
 		56AB6CC2285CB11500DD6C78 /* UIView-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extensions.swift"; sourceTree = "<group>"; };
 		56B343212850EC5D00CB5B49 /* AuthConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConstants.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				56716F9F284E348500DAFE9F /* LoginViewModel.swift */,
 				563965A9285A0C5B00C127BB /* HomeTabViewModel.swift */,
 				563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */,
+				56A7CB3E286219E400DF0027 /* RepoItemCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 				56AB6CC3285CB11500DD6C78 /* UIView-Extensions.swift in Sources */,
 				566D26D72858A4C200416EF1 /* GHUserProfileModel.swift in Sources */,
 				56AB6CC1285CAFB100DD6C78 /* RootDefaultView.swift in Sources */,
+				56A7CB3F286219E400DF0027 /* RepoItemCellViewModel.swift in Sources */,
 				56716FA0284E348500DAFE9F /* LoginViewModel.swift in Sources */,
 				563965A82859F91500C127BB /* BasicSequenceOperation.swift in Sources */,
 				566D27012858B5C400416EF1 /* KeyChainManager.swift in Sources */,
