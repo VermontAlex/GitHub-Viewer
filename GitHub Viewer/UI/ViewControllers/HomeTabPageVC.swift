@@ -35,13 +35,17 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     private func configureTableView() {
         repoTableView.delegate = self
         repoTableView.dataSource = self
+        repoTableView.separatorColor = .clear
         repoTableView.register(RepoTableItemCell.nib(), forCellReuseIdentifier: RepoTableItemCell.cellReuseIdentifier)
-        guard let viewModel = viewModel,
-              let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
+//        guard let viewModel = viewModel,
+//              let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
+//              let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
+//                  return
+//              }
+        guard let dataToken = try? KeyChainManager.get(account: "VermontAlex", service: "github.com"),
               let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
                   return
               }
-        
         gitManager.searchForRepos(byName: "GitHub-Viewer",
                                   token: token) { result in
             switch result {

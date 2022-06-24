@@ -45,7 +45,7 @@ enum ErrorHandlerService {
         return nil
     }
     
-    func handleErrorWithDB() {
+    func handleErrorWithDB(error: Error? = nil) {
         //  Should be implemented when backend done.
     }
 }

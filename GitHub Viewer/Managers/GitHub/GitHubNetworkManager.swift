@@ -42,8 +42,8 @@ struct GitHubNetworkManager {
         operationQueue.waitUntilAllOperationsAreFinished()
     }
     
-    func searchForRepos(byName: String, token: String, completion: @escaping (Result<RepoSearchResult, Error>) -> Void) {
-        guard let request = GitHubRequestBuilder.fetchRepoItems(searchBy: "GitHub-Viewer", page: 1, token: token).request else { return }
+    func searchForRepos(byName: String, pageNum: Int, token: String, completion: @escaping (Result<RepoSearchResult, Error>) -> Void) {
+        guard let request = GitHubRequestBuilder.fetchRepoItems(searchBy: "GitHub-Viewer", page: pageNum, token: token).request else { return }
         let operationQueue = OperationQueue()
         let fetchReposOperation = FetchRepos(urlRequest: request) { result in
             switch result {
