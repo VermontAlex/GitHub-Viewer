@@ -20,6 +20,8 @@ class RepoTableItemCell: UITableViewCell {
     @IBOutlet var descriptionHightConstraint: NSLayoutConstraint!
     @IBOutlet var stars: UILabel!
     @IBOutlet var showMoreButton: UIButton!
+    @IBOutlet var infoContainerStackView: UIStackView!
+    
     
     static var cellReuseIdentifier = "RepoTableItemCell"
     
@@ -41,10 +43,12 @@ class RepoTableItemCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.contentView.backgroundColor = .white 
         self.mainView?.layer.borderColor = UIColor.gray.cgColor
-        self.mainView?.layer.borderWidth = 1.0
+        self.mainView?.layer.borderWidth = 0.3
         self.mainView.backgroundColor = .systemBackground
-        self.mainView?.dropShadow(cornerRadius: 8, shadowRadius: 5, backgroundColor: .clear, opacity: 0.2, size: .zero)
+        self.mainView?.dropShadow(cornerRadius: 8, shadowRadius: 5, backgroundColor: .clear, opacity: 10,
+                                  size: .zero)
         
         self.descriptionHightConstraint.isActive = false
         showMoreButton.isHidden = true
