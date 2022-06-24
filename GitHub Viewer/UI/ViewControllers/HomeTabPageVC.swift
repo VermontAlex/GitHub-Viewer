@@ -24,8 +24,9 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillHomeTab()
         searchBar.searchBarStyle = .minimal
+        fillHomeTab()
+        fillTheTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,31 +38,71 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         repoTableView.dataSource = self
         repoTableView.separatorColor = .clear
         repoTableView.register(RepoTableItemCell.nib(), forCellReuseIdentifier: RepoTableItemCell.cellReuseIdentifier)
-//        guard let viewModel = viewModel,
-//              let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
-//              let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
-//                  return
-//              }
-        guard let dataToken = try? KeyChainManager.get(account: "VermontAlex", service: "github.com"),
+    }
+    
+    private func fillTheTable() {
+        guard let viewModel = viewModel,
+              let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
               let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
                   return
               }
-        gitManager.searchForRepos(byName: "GitHub-Viewer",
+        var searchName = "GitHub-Viewer"
+        var pageNum = 1
+        
+        var firstFetchDidFinish = false
+        
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
+        
+        gitManager.searchForRepos(byName: searchName,
+                                  pageNum: pageNum,
                                   token: token) { result in
             switch result {
             case .success(let repos):
+                let reposViewModel = repos.items.map { repo in
+                    return RepoItemCellViewModel(repo: repo)
+                }
                 
+                self.searchedRepo.append(contentsOf: reposViewModel)
+                dispatchGroup.leave()
+            case .failure(let error):
+                ErrorHandlerService.unknownedError.handleErrorWithDB(error: error)
+                dispatchGroup.leave()
+            }
+        }
+        
+        dispatchGroup.enter()
+        gitManager.searchForRepos(byName: searchName,
+                                  pageNum: pageNum + 1,
+                                  token: token) { result in
+            switch result {
+            case .success(let repos):
                 let reposViewModel = repos.items.map { repo in
                     return RepoItemCellViewModel(repo: repo)
                 }
                 self.searchedRepo.append(contentsOf: reposViewModel)
-                DispatchQueue.main.async {
-                    self.repoTableView.reloadData()
-                }
+                dispatchGroup.leave()
+
             case .failure(let error):
-                print(error)
+                ErrorHandlerService.unknownedError.handleErrorWithDB(error: error)
+                dispatchGroup.leave()
             }
         }
+        
+        dispatchGroup.notify(queue: .main) {
+            //  Sort in case not sequenlty fetched.
+            if self.sortIsNeeded() {
+                self.searchedRepo.sort(by: { $0.repo.stargazersCount > $1.repo.stargazersCount })
+            }
+            
+            self.repoTableView.reloadData()
+        }
+    }
+    
+    private func sortIsNeeded() -> Bool {
+        guard let first = self.searchedRepo.first, let last = self.searchedRepo.last else { return false }
+        return first.repo.stargazersCount < last.repo.stargazersCount
     }
     
     private func fillHomeTab() {
