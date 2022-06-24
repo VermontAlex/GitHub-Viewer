@@ -26,7 +26,7 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         super.viewDidLoad()
         searchBar.searchBarStyle = .minimal
         fillHomeTab()
-        fillTheTable()
+        initialFillTheTable()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,41 +40,46 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         repoTableView.register(RepoTableItemCell.nib(), forCellReuseIdentifier: RepoTableItemCell.cellReuseIdentifier)
     }
     
-    private func fillTheTable() {
+    private func initialFillTheTable() {
+        guard let viewModel = viewModel else {
+            return
+        }
+        viewModel.searchByWord = "GitHub-Viewer"
+        viewModel.paginationNumber = 1
+        
+        fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
+    }
+    
+    private func fillTheTable(pagination: Int, searchedWord: String) {
         guard let viewModel = viewModel,
               let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
               let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
                   return
               }
-        var searchName = "GitHub-Viewer"
-        var pageNum = 1
-        
-        var firstFetchDidFinish = false
         
         let dispatchGroup = DispatchGroup()
-        
         dispatchGroup.enter()
-        
-        gitManager.searchForRepos(byName: searchName,
-                                  pageNum: pageNum,
+        gitManager.searchForRepos(byName: searchedWord,
+                                  pageNum: pagination,
                                   token: token) { result in
             switch result {
             case .success(let repos):
                 let reposViewModel = repos.items.map { repo in
                     return RepoItemCellViewModel(repo: repo)
                 }
-                
                 self.searchedRepo.append(contentsOf: reposViewModel)
+                
                 dispatchGroup.leave()
             case .failure(let error):
                 ErrorHandlerService.unknownedError.handleErrorWithDB(error: error)
+                
                 dispatchGroup.leave()
             }
         }
         
         dispatchGroup.enter()
-        gitManager.searchForRepos(byName: searchName,
-                                  pageNum: pageNum + 1,
+        gitManager.searchForRepos(byName: searchedWord,
+                                  pageNum: pagination + 1,
                                   token: token) { result in
             switch result {
             case .success(let repos):
@@ -82,10 +87,11 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
                     return RepoItemCellViewModel(repo: repo)
                 }
                 self.searchedRepo.append(contentsOf: reposViewModel)
+                viewModel.paginationNumber += 2
                 dispatchGroup.leave()
-
             case .failure(let error):
                 ErrorHandlerService.unknownedError.handleErrorWithDB(error: error)
+                
                 dispatchGroup.leave()
             }
         }
@@ -115,6 +121,13 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     private func fillHomeTabDefault() {
         welcomeLabel.font = UIFont.sf(style: .bold, size: 20)
         welcomeLabel.text = "Welcome!"
+    }
+    
+    @IBAction func searchRepoButton(_ sender: UIButton) {
+        guard let viewModel = viewModel else {
+            return
+        }
+        fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
     }
 }
 

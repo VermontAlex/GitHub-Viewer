@@ -24,8 +24,8 @@ class LoginPageVC: UIViewController, StoryboardedProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        fillInformation()
-        self.coordinator?.stop(andMoveTo: .homeTab(viewModel: nil))
+        
+        fillInformation()
     }
     
     private func fillInformation() {

@@ -25,7 +25,7 @@ struct RepoItemModel: Codable {
     let itemPrivate: Bool
     let owner: RepoOwner
     let htmlURL: String
-    let itemDescription: String
+    let itemDescription: String?
     let stargazersCount: Int
     let forksCount: Int
     

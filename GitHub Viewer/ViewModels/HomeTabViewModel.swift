@@ -7,10 +7,12 @@
 
 import UIKit
 
-struct HomeTabViewModel {
+class HomeTabViewModel {
     
     let account: AccountViewModelProtocol
     let service: String
+    var paginationNumber: Int = 1
+    var searchByWord: String = ""
     var customTransition: UIViewControllerTransitioningDelegate?
     
     var tokenToUse: String? {
