@@ -72,10 +72,11 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
                 dispatchGroup.leave()
             case .failure(let error):
                 ErrorHandlerService.unknownedError.handleErrorWithDB(error: error)
-                
                 dispatchGroup.leave()
             }
         }
+        
+        dispatchGroup.wait()
         
         dispatchGroup.enter()
         gitManager.searchForRepos(byName: searchedWord,
@@ -97,18 +98,8 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         }
         
         dispatchGroup.notify(queue: .main) {
-            //  Sort in case not sequenlty fetched.
-            if self.sortIsNeeded() {
-                self.searchedRepo.sort(by: { $0.repo.stargazersCount > $1.repo.stargazersCount })
-            }
-            
             self.repoTableView.reloadData()
         }
-    }
-    
-    private func sortIsNeeded() -> Bool {
-        guard let first = self.searchedRepo.first, let last = self.searchedRepo.last else { return false }
-        return first.repo.stargazersCount < last.repo.stargazersCount
     }
     
     private func fillHomeTab() {
