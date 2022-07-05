@@ -16,6 +16,7 @@
 		563F671F285B497300A58BEA /* AccountViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */; };
 		563F6721285B6B9000A58BEA /* CustomTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F6720285B6B9000A58BEA /* CustomTransitionManager.swift */; };
 		563F6723285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563F6722285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift */; };
+		565B07B82874746D0079D051 /* TouchedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565B07B72874746D0079D051 /* TouchedView.swift */; };
 		566C4259284F38A800DB91AF /* UIFont-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C4258284F38A800DB91AF /* UIFont-Extension.swift */; };
 		566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */; };
 		566C425D284FA80800DB91AF /* GitHubRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */; };
@@ -72,6 +73,7 @@
 		563F671E285B497300A58BEA /* AccountViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewModelProtocol.swift; sourceTree = "<group>"; };
 		563F6720285B6B9000A58BEA /* CustomTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionManager.swift; sourceTree = "<group>"; };
 		563F6722285B6CBE00A58BEA /* CustomTransitionAnimationHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionAnimationHomePage.swift; sourceTree = "<group>"; };
+		565B07B72874746D0079D051 /* TouchedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchedView.swift; sourceTree = "<group>"; };
 		566C4258284F38A800DB91AF /* UIFont-Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont-Extension.swift"; sourceTree = "<group>"; };
 		566C425A284FA56600DB91AF /* GitHubNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubNetworkManager.swift; sourceTree = "<group>"; };
 		566C425C284FA80800DB91AF /* GitHubRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubRequestBuilder.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				56AB6CC0285CAFB100DD6C78 /* RootDefaultView.swift */,
+				565B07B72874746D0079D051 /* TouchedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				56A34722284DEFE600CEFF73 /* SceneDelegate.swift in Sources */,
 				5634AF43285DF54500979F61 /* RepoItemModel.swift in Sources */,
 				5634AF3E285DCD4F00979F61 /* RepoTableItemCell.swift in Sources */,
+				565B07B82874746D0079D051 /* TouchedView.swift in Sources */,
 				56B343262850EF7F00CB5B49 /* LoginGitHubModel.swift in Sources */,
 				56716F90284E0DBD00DAFE9F /* LoginPageVC.swift in Sources */,
 				566C425B284FA56600DB91AF /* GitHubNetworkManager.swift in Sources */,

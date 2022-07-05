@@ -27,12 +27,28 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     weak var coordinator: CoordinatorProtocol?
     var viewModel: HomeTabViewModel?
     
+    private var defaultSearch: String = ""
+    private var searchedText: String {
+        get {
+            if defaultSearch.isEmpty {
+                return "GitHub-Viewer"
+            } else {
+                return defaultSearch
+            }
+        }
+        
+        set {
+            defaultSearch = newValue
+        }
+    }
+
     private let gitManager = GitHubNetworkManager()
     private var searchedRepo = [RepoItemCellViewModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.searchBarStyle = .minimal
+        searchBar.delegate = self
         fillHomeTab()
         initialFillTheTable()
     }
@@ -59,7 +75,7 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         guard let viewModel = viewModel else {
             return
         }
-        viewModel.searchByWord = "GitHub-Viewer"
+        viewModel.searchByWord = searchedText
         viewModel.paginationNumber = 1
         
         DispatchQueue.global().async {
@@ -136,10 +152,20 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     }
     
     @IBAction func searchRepoButton(_ sender: UIButton) {
+        searchBar.resignFirstResponder()
         guard let viewModel = viewModel else {
             return
         }
-        fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
+        viewModel.searchByWord = searchedText
+        viewModel.paginationNumber = 1
+        
+        searchedRepo.removeAll()
+        self.repoTableView.reloadData()
+        self.repoTableView.addSubview(activityIndicator)
+        animateIndicator(true)
+        
+        viewModel.searchByWord = searchedText
+        fillTheTable(pagination: viewModel.paginationNumber, searchedWord: searchedText)
     }
 }
 
@@ -187,5 +213,30 @@ extension HomeTabPageVC: RepoItemCellDelegate {
         
         inBlock()
         self.repoTableView.reloadData()
+    }
+}
+
+extension HomeTabPageVC: UISearchBarDelegate {
+    
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        let viewTouchIndicator = TouchedView()
+        viewTouchIndicator.backgroundColor = .clear
+        viewTouchIndicator.translatesAutoresizingMaskIntoConstraints = false
+        viewTouchIndicator.resignView = {
+            searchBar.resignFirstResponder()
+        }
+        self.view.addSubview(viewTouchIndicator)
+        let constraints: [NSLayoutConstraint] = [
+            viewTouchIndicator.topAnchor.constraint(equalTo: self.welcomeLabel.topAnchor),
+            viewTouchIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            viewTouchIndicator.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            viewTouchIndicator.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchedText = searchText
     }
 }

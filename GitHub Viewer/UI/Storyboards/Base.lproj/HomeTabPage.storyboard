@@ -22,11 +22,15 @@
                                 <color key="backgroundColor" name="creamBlueColor"/>
                                 <color key="sectionIndexBackgroundColor" name="creamBlueColor"/>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="hn6-VN-cu4">
+                            <searchBar contentMode="redraw" placeholder="Lets find something interesting" translatesAutoresizingMaskIntoConstraints="NO" id="hn6-VN-cu4">
                                 <rect key="frame" x="0.0" y="24" width="1125" height="51"/>
                                 <color key="backgroundColor" name="creamBlueColor"/>
                                 <color key="barTintColor" name="creamBlueColor"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
                             </searchBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iQC-fy-IBV" userLabel="SeparatorView">
                                 <rect key="frame" x="0.0" y="95.5" width="1194" height="3"/>
