@@ -38,7 +38,6 @@ final class KeyChainManager {
                 kSecValueData as String: accessToken as AnyObject]
             
             status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
-            print(status)
         }
         
         guard status == errSecSuccess else {

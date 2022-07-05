@@ -13,6 +13,14 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     @IBOutlet var welcomeLabel: UILabel!
     @IBOutlet var searchBar: UISearchBar!
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.hidesWhenStopped = true
+        indicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        
+        return indicator
+    }()
+    
     static let identifier = "HomeTabPageVC"
     static let storyboardName = "HomeTabPage"
     
@@ -38,6 +46,13 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         repoTableView.dataSource = self
         repoTableView.separatorColor = .clear
         repoTableView.register(RepoTableItemCell.nib(), forCellReuseIdentifier: RepoTableItemCell.cellReuseIdentifier)
+        repoTableView.tableFooterView = activityIndicator
+    }
+    
+    private func animateIndicator(_ bool: Bool) {
+        DispatchQueue.main.async {
+            bool ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+        }
     }
     
     private func initialFillTheTable() {
@@ -47,10 +62,14 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         viewModel.searchByWord = "GitHub-Viewer"
         viewModel.paginationNumber = 1
         
-        fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
+        DispatchQueue.global().async {
+            self.fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
+        }
     }
     
     private func fillTheTable(pagination: Int, searchedWord: String) {
+        animateIndicator(true)
+        
         guard let viewModel = viewModel,
               let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
               let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
@@ -77,7 +96,6 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         }
         
         dispatchGroup.wait()
-        
         dispatchGroup.enter()
         gitManager.searchForRepos(byName: searchedWord,
                                   pageNum: pagination + 1,
@@ -97,9 +115,12 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
             }
         }
         
-        dispatchGroup.notify(queue: .main) {
+        let dispatchWorkItem = DispatchWorkItem {
             self.repoTableView.reloadData()
+            self.animateIndicator(false)
         }
+        
+        dispatchGroup.notify(queue: .main, work: dispatchWorkItem)
     }
     
     private func fillHomeTab() {
@@ -141,11 +162,19 @@ extension HomeTabPageVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return  UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        DispatchQueue.global().async {
+            guard self.searchedRepo.count - 5 < indexPath.row, let viewModel = self.viewModel else { return }
+            self.fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
+        }
+    }
 }
 
 extension HomeTabPageVC: RepoItemCellDelegate {
     
     func updateCellHeight(vm: RepoItemCellViewModel?, inBlock: () -> Void) {
+        
         if let vm = vm {
             for cellViewModel in searchedRepo {
                 if cellViewModel === vm {
@@ -155,7 +184,7 @@ extension HomeTabPageVC: RepoItemCellDelegate {
                 cellViewModel.expanded = false
             }
         }
-
+        
         inBlock()
         self.repoTableView.reloadData()
     }

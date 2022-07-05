@@ -76,34 +76,37 @@ class RepoTableItemCell: UITableViewCell {
     }
     
     private func observeFrame() {
-        self.frameObserver = self.observe(\.frame, options: .new) { [weak self] _, _ in
-            guard let strongSelf = self,
-                  let descriptionTextView = self?.repoDescriptionTextView
-                else { return }
-            
-            strongSelf.setNeedsLayout()
-            strongSelf.layoutIfNeeded()
-            
-            let size = CGSize(width: descriptionTextView.frame.width, height: .infinity)
-            let targetSize = descriptionTextView.sizeThatFits(size)
-            
-            let maxHeight = strongSelf.maxDescriptionHeight
-            
-            if targetSize.height > maxHeight && strongSelf.viewModel?.needShowMore == false {
-                strongSelf.delegate?.updateCellHeight(vm: nil) {
-                    strongSelf.viewModel?.needShowMore = true
-                    strongSelf.updateExpandedState()
-                    strongSelf.needsUpdateConstraints()
-                }
-            } else if targetSize.height <= maxHeight && strongSelf.viewModel?.needShowMore == true {
-                strongSelf.delegate?.updateCellHeight(vm: nil) {
-                    strongSelf.viewModel?.needShowMore = false
-                    strongSelf.updateExpandedState()
-                    strongSelf.needsUpdateConstraints()
+        DispatchQueue.global().async {
+            self.frameObserver = self.observe(\.frame, options: .new) { [weak self] _, _ in
+                DispatchQueue.main.async {
+                    guard let strongSelf = self,
+                          let descriptionTextView = self?.repoDescriptionTextView
+                    else { return }
+
+                    strongSelf.setNeedsLayout()
+                    strongSelf.layoutIfNeeded()
+
+                    let size = CGSize(width: descriptionTextView.frame.width, height: .infinity)
+                    let targetSize = descriptionTextView.sizeThatFits(size)
+
+                    let maxHeight = strongSelf.maxDescriptionHeight
+
+                    if targetSize.height > maxHeight && strongSelf.viewModel?.needShowMore == false {
+                        strongSelf.delegate?.updateCellHeight(vm: nil) {
+                            strongSelf.viewModel?.needShowMore = true
+                            strongSelf.updateExpandedState()
+                            strongSelf.needsUpdateConstraints()
+                        }
+                    } else if targetSize.height <= maxHeight && strongSelf.viewModel?.needShowMore == true {
+                        strongSelf.delegate?.updateCellHeight(vm: nil) {
+                            strongSelf.viewModel?.needShowMore = false
+                            strongSelf.updateExpandedState()
+                            strongSelf.needsUpdateConstraints()
+                        }
+                    }
                 }
             }
         }
-        
     }
 
     @IBAction func showMoreButtonTapped(_ sender: UIButton) {
