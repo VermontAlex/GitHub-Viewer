@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class HomeTabPageVC: UIViewController, StoryboardedProtocol {
     
@@ -65,27 +66,19 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         repoTableView.tableFooterView = activityIndicator
     }
     
-    private func animateIndicator(_ bool: Bool) {
-        DispatchQueue.main.async {
-            bool ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
-        }
-    }
-    
     private func initialFillTheTable() {
         guard let viewModel = viewModel else {
             return
         }
         viewModel.searchByWord = searchedText
         viewModel.paginationNumber = 1
-        
+        activityIndicator.startAnimating()
         DispatchQueue.global().async {
             self.fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
         }
     }
     
     private func fillTheTable(pagination: Int, searchedWord: String) {
-        animateIndicator(true)
-        
         guard let viewModel = viewModel,
               let dataToken = try? KeyChainManager.get(account: viewModel.account.login, service: viewModel.service),
               let token = String(data: dataToken, encoding: String.Encoding.utf8) else {
@@ -133,7 +126,7 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         
         let dispatchWorkItem = DispatchWorkItem {
             self.repoTableView.reloadData()
-            self.animateIndicator(false)
+            self.activityIndicator.stopAnimating()
         }
         
         dispatchGroup.notify(queue: .main, work: dispatchWorkItem)
@@ -151,6 +144,30 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         welcomeLabel.text = "Welcome!"
     }
     
+    private func createTapHandleView() {
+        let viewTouchIndicator = TouchedView()
+        viewTouchIndicator.backgroundColor = .clear
+        viewTouchIndicator.translatesAutoresizingMaskIntoConstraints = false
+        
+        viewTouchIndicator.resignView = { [weak self] in
+            self?.searchBar.resignFirstResponder()
+        }
+        
+        self.view.addSubview(viewTouchIndicator)
+        let constraints: [NSLayoutConstraint] = [
+            viewTouchIndicator.topAnchor.constraint(equalTo: self.welcomeLabel.topAnchor),
+            viewTouchIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            viewTouchIndicator.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            viewTouchIndicator.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+    }
+    
+    private func openUrlInSafari(url: URL) {
+        let safariVC = SFSafariViewController(url: url)
+        self.present(safariVC, animated: true, completion: nil)
+    }
+    
     @IBAction func searchRepoButton(_ sender: UIButton) {
         searchBar.resignFirstResponder()
         guard let viewModel = viewModel else {
@@ -160,9 +177,9 @@ class HomeTabPageVC: UIViewController, StoryboardedProtocol {
         viewModel.paginationNumber = 1
         
         searchedRepo.removeAll()
-        self.repoTableView.reloadData()
-        self.repoTableView.addSubview(activityIndicator)
-        animateIndicator(true)
+        repoTableView.reloadData()
+        repoTableView.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         
         viewModel.searchByWord = searchedText
         fillTheTable(pagination: viewModel.paginationNumber, searchedWord: searchedText)
@@ -190,10 +207,16 @@ extension HomeTabPageVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        activityIndicator.startAnimating()
         DispatchQueue.global().async {
             guard self.searchedRepo.count - 5 < indexPath.row, let viewModel = self.viewModel else { return }
             self.fillTheTable(pagination: viewModel.paginationNumber, searchedWord: viewModel.searchByWord)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let selectedRepoUrl = URL(string: searchedRepo[indexPath.row].repo.htmlURL) else { return }
+        openUrlInSafari(url: selectedRepoUrl)
     }
 }
 
@@ -212,27 +235,14 @@ extension HomeTabPageVC: RepoItemCellDelegate {
         }
         
         inBlock()
-        self.repoTableView.reloadData()
+        repoTableView.reloadData()
     }
 }
 
 extension HomeTabPageVC: UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        let viewTouchIndicator = TouchedView()
-        viewTouchIndicator.backgroundColor = .clear
-        viewTouchIndicator.translatesAutoresizingMaskIntoConstraints = false
-        viewTouchIndicator.resignView = {
-            searchBar.resignFirstResponder()
-        }
-        self.view.addSubview(viewTouchIndicator)
-        let constraints: [NSLayoutConstraint] = [
-            viewTouchIndicator.topAnchor.constraint(equalTo: self.welcomeLabel.topAnchor),
-            viewTouchIndicator.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            viewTouchIndicator.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            viewTouchIndicator.rightAnchor.constraint(equalTo: self.view.rightAnchor)
-        ]
-        NSLayoutConstraint.activate(constraints)
+        createTapHandleView()
         return true
     }
     

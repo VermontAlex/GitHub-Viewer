@@ -37,24 +37,24 @@ class RepoTableItemCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.frameObserver?.invalidate()
-        self.observeFrame()
+        frameObserver?.invalidate()
+        observeFrame()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = .white 
-        self.mainView?.layer.borderColor = UIColor.gray.cgColor
-        self.mainView?.layer.borderWidth = 0.3
-        self.mainView.backgroundColor = .systemBackground
-        self.mainView?.dropShadow(cornerRadius: 8, shadowRadius: 5, backgroundColor: .clear, opacity: 10,
+        mainView?.layer.borderColor = UIColor.gray.cgColor
+        mainView?.layer.borderWidth = 0.3
+        mainView.backgroundColor = .systemBackground
+        mainView?.dropShadow(cornerRadius: 8, shadowRadius: 5, backgroundColor: .clear, opacity: 10,
                                   size: .zero)
         
-        self.descriptionHightConstraint.isActive = false
+        descriptionHightConstraint.isActive = false
         showMoreButton.isHidden = true
-        self.repoDescriptionTextView.textContainerInset = UIEdgeInsets.zero
-        self.repoDescriptionTextView.textContainer.lineFragmentPadding = 0
-        self.observeFrame()
+        repoDescriptionTextView.textContainerInset = UIEdgeInsets.zero
+        repoDescriptionTextView.textContainer.lineFragmentPadding = 0
+        observeFrame()
     }
     
     func setupWith(viewModel: RepoItemCellViewModel) {
@@ -70,9 +70,9 @@ class RepoTableItemCell: UITableViewCell {
 
     private func updateExpandedState() {
         guard let vm = viewModel else { return }
-        self.descriptionHightConstraint?.isActive = !(vm.needShowMore && vm.expanded)
-        self.showMoreButton?.isHidden = !vm.needShowMore
-        self.showMoreButton?.setTitle(vm.expanded ?  "Show Less" : "Show More", for: .normal)
+        descriptionHightConstraint?.isActive = !(vm.needShowMore && vm.expanded)
+        showMoreButton?.isHidden = !vm.needShowMore
+        showMoreButton?.setTitle(vm.expanded ?  "Show Less" : "Show More", for: .normal)
     }
     
     private func observeFrame() {
