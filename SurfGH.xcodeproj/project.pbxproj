@@ -89,7 +89,7 @@
 		56716F9F284E348500DAFE9F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		5682FA92285C726F00250C40 /* InternetReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetReachability.swift; sourceTree = "<group>"; };
 		5682FA95285C740700250C40 /* ErrorHandlerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandlerService.swift; sourceTree = "<group>"; };
-		56A3471C284DEFE600CEFF73 /* GitHub Viewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GitHub Viewer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A3471C284DEFE600CEFF73 /* SurfGH.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SurfGH.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A3471F284DEFE600CEFF73 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56A34721284DEFE600CEFF73 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		56A34723284DEFE600CEFF73 /* HomeTabPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabPageVC.swift; sourceTree = "<group>"; };
@@ -97,8 +97,8 @@
 		56A34728284DEFE800CEFF73 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56A3472B284DEFE800CEFF73 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56A3472D284DEFE800CEFF73 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		56A34732284DEFE800CEFF73 /* GitHub ViewerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHub ViewerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		56A3473C284DEFE800CEFF73 /* GitHub ViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "GitHub ViewerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A34732284DEFE800CEFF73 /* SurfGHTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurfGHTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A3473C284DEFE800CEFF73 /* SurfGHUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SurfGHUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		56A7CB3E286219E400DF0027 /* RepoItemCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoItemCellViewModel.swift; sourceTree = "<group>"; };
 		56AB6CC0285CAFB100DD6C78 /* RootDefaultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootDefaultView.swift; sourceTree = "<group>"; };
 		56AB6CC2285CB11500DD6C78 /* UIView-Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView-Extensions.swift"; sourceTree = "<group>"; };
@@ -272,7 +272,7 @@
 		56A34713284DEFE600CEFF73 = {
 			isa = PBXGroup;
 			children = (
-				56A3471E284DEFE600CEFF73 /* GitHub Viewer */,
+				56A3471E284DEFE600CEFF73 /* SurfGH */,
 				56A34735284DEFE800CEFF73 /* UnitTests */,
 				56A3471D284DEFE600CEFF73 /* Products */,
 			);
@@ -281,14 +281,14 @@
 		56A3471D284DEFE600CEFF73 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				56A3471C284DEFE600CEFF73 /* GitHub Viewer.app */,
-				56A34732284DEFE800CEFF73 /* GitHub ViewerTests.xctest */,
-				56A3473C284DEFE800CEFF73 /* GitHub ViewerUITests.xctest */,
+				56A3471C284DEFE600CEFF73 /* SurfGH.app */,
+				56A34732284DEFE800CEFF73 /* SurfGHTests.xctest */,
+				56A3473C284DEFE800CEFF73 /* SurfGHUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		56A3471E284DEFE600CEFF73 /* GitHub Viewer */ = {
+		56A3471E284DEFE600CEFF73 /* SurfGH */ = {
 			isa = PBXGroup;
 			children = (
 				56716F7B284E0B6D00DAFE9F /* Coordinator */,
@@ -303,7 +303,7 @@
 				56A3472D284DEFE800CEFF73 /* Info.plist */,
 				56A34728284DEFE800CEFF73 /* Assets.xcassets */,
 			);
-			path = "GitHub Viewer";
+			path = SurfGH;
 			sourceTree = "<group>";
 		};
 		56A34735284DEFE800CEFF73 /* UnitTests */ = {
@@ -326,9 +326,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		56A3471B284DEFE600CEFF73 /* GitHub Viewer */ = {
+		56A3471B284DEFE600CEFF73 /* SurfGH */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 56A34746284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "GitHub Viewer" */;
+			buildConfigurationList = 56A34746284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "SurfGH" */;
 			buildPhases = (
 				56A34718284DEFE600CEFF73 /* Sources */,
 				56A34719284DEFE600CEFF73 /* Frameworks */,
@@ -338,14 +338,14 @@
 			);
 			dependencies = (
 			);
-			name = "GitHub Viewer";
+			name = SurfGH;
 			productName = "GitHub Viewer";
-			productReference = 56A3471C284DEFE600CEFF73 /* GitHub Viewer.app */;
+			productReference = 56A3471C284DEFE600CEFF73 /* SurfGH.app */;
 			productType = "com.apple.product-type.application";
 		};
-		56A34731284DEFE800CEFF73 /* GitHub ViewerTests */ = {
+		56A34731284DEFE800CEFF73 /* SurfGHTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 56A34749284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "GitHub ViewerTests" */;
+			buildConfigurationList = 56A34749284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "SurfGHTests" */;
 			buildPhases = (
 				56A3472E284DEFE800CEFF73 /* Sources */,
 				56A3472F284DEFE800CEFF73 /* Frameworks */,
@@ -356,14 +356,14 @@
 			dependencies = (
 				56A34734284DEFE800CEFF73 /* PBXTargetDependency */,
 			);
-			name = "GitHub ViewerTests";
+			name = SurfGHTests;
 			productName = "GitHub ViewerTests";
-			productReference = 56A34732284DEFE800CEFF73 /* GitHub ViewerTests.xctest */;
+			productReference = 56A34732284DEFE800CEFF73 /* SurfGHTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		56A3473B284DEFE800CEFF73 /* GitHub ViewerUITests */ = {
+		56A3473B284DEFE800CEFF73 /* SurfGHUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 56A3474C284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "GitHub ViewerUITests" */;
+			buildConfigurationList = 56A3474C284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "SurfGHUITests" */;
 			buildPhases = (
 				56A34738284DEFE800CEFF73 /* Sources */,
 				56A34739284DEFE800CEFF73 /* Frameworks */,
@@ -374,9 +374,9 @@
 			dependencies = (
 				56A3473E284DEFE800CEFF73 /* PBXTargetDependency */,
 			);
-			name = "GitHub ViewerUITests";
+			name = SurfGHUITests;
 			productName = "GitHub ViewerUITests";
-			productReference = 56A3473C284DEFE800CEFF73 /* GitHub ViewerUITests.xctest */;
+			productReference = 56A3473C284DEFE800CEFF73 /* SurfGHUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -402,7 +402,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 56A34717284DEFE600CEFF73 /* Build configuration list for PBXProject "GitHub Viewer" */;
+			buildConfigurationList = 56A34717284DEFE600CEFF73 /* Build configuration list for PBXProject "SurfGH" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -415,9 +415,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				56A3471B284DEFE600CEFF73 /* GitHub Viewer */,
-				56A34731284DEFE800CEFF73 /* GitHub ViewerTests */,
-				56A3473B284DEFE800CEFF73 /* GitHub ViewerUITests */,
+				56A3471B284DEFE600CEFF73 /* SurfGH */,
+				56A34731284DEFE800CEFF73 /* SurfGHTests */,
+				56A3473B284DEFE800CEFF73 /* SurfGHUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -510,12 +510,12 @@
 /* Begin PBXTargetDependency section */
 		56A34734284DEFE800CEFF73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 56A3471B284DEFE600CEFF73 /* GitHub Viewer */;
+			target = 56A3471B284DEFE600CEFF73 /* SurfGH */;
 			targetProxy = 56A34733284DEFE800CEFF73 /* PBXContainerItemProxy */;
 		};
 		56A3473E284DEFE800CEFF73 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 56A3471B284DEFE600CEFF73 /* GitHub Viewer */;
+			target = 56A3471B284DEFE600CEFF73 /* SurfGH */;
 			targetProxy = 56A3473D284DEFE800CEFF73 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -665,7 +665,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P53ZA2TH9W;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "GitHub Viewer/Info.plist";
+				INFOPLIST_FILE = SurfGH/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -675,7 +675,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vermontalex.GitHub-Viewer";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vermontalex.SurfGH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -692,7 +692,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = P53ZA2TH9W;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "GitHub Viewer/Info.plist";
+				INFOPLIST_FILE = SurfGH/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -702,7 +702,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vermontalex.GitHub-Viewer";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vermontalex.SurfGH;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -721,12 +721,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vermontalex.GitHub-ViewerTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vermontalex.SurfGHTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitHub Viewer.app/GitHub Viewer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SurfGH.app/SurfGH";
 			};
 			name = Debug;
 		};
@@ -741,12 +741,12 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vermontalex.GitHub-ViewerTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vermontalex.SurfGHTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GitHub Viewer.app/GitHub Viewer";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SurfGH.app/SurfGH";
 			};
 			name = Release;
 		};
@@ -759,7 +759,7 @@
 				DEVELOPMENT_TEAM = P53ZA2TH9W;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vermontalex.GitHub-ViewerUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vermontalex.SurfGHUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -777,7 +777,7 @@
 				DEVELOPMENT_TEAM = P53ZA2TH9W;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vermontalex.GitHub-ViewerUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.vermontalex.SurfGHUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -789,7 +789,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		56A34717284DEFE600CEFF73 /* Build configuration list for PBXProject "GitHub Viewer" */ = {
+		56A34717284DEFE600CEFF73 /* Build configuration list for PBXProject "SurfGH" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56A34744284DEFE900CEFF73 /* Debug */,
@@ -798,7 +798,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		56A34746284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "GitHub Viewer" */ = {
+		56A34746284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "SurfGH" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56A34747284DEFE900CEFF73 /* Debug */,
@@ -807,7 +807,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		56A34749284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "GitHub ViewerTests" */ = {
+		56A34749284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "SurfGHTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56A3474A284DEFE900CEFF73 /* Debug */,
@@ -816,7 +816,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		56A3474C284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "GitHub ViewerUITests" */ = {
+		56A3474C284DEFE900CEFF73 /* Build configuration list for PBXNativeTarget "SurfGHUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				56A3474D284DEFE900CEFF73 /* Debug */,
